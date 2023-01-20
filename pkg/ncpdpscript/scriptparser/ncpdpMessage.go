@@ -73,18 +73,12 @@ func (msg *ncpdpMessage) Validate(data []byte) (bool, string) {
 		okMessage = false
 		errorMessage = "bin number must be numeric"
 	}
-	//versionRel := string(data[6:8])
-
-	//transactionCode := data[8:10]
-	//pcn := data[10:20]
 
 	transactionCount := data[20:21]
 	if !isNumber(transactionCount) {
 		okMessage = false
 		errorMessage = "transaction count must be numeric"
 	}
-	//serviceProviderIdQualifier := data[21:23]
-	//serviceProviderId := data[23:38]
 
 	dos := data[38:46]
 	if !isDate(dos) {
@@ -124,11 +118,6 @@ func (msg *ncpdpMessage) isSegmentPresentByTag(identifier string) bool {
 	}
 	return msg.isSegmentPresent(groupId, ids[1])
 }
-
-//
-//func (msg *ncpdpMessage) GetTransactionAsBytes() []byte {
-//	msg.groups[0].segments[0].fields[0].String()
-//}
 
 func isNumber(v []byte) bool {
 	_, err := strconv.Atoi(string(v))
