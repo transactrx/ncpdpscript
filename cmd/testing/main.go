@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"gihub.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
 	"gihub.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages"
 	"log"
@@ -17,5 +18,9 @@ func main() {
 	if err != nil {
 		log.Printf("Unamarshal err: %v", err)
 	}
-
+	ncpdpJson, err := json.Marshal(msg)
+	if err != nil {
+		log.Printf("Unamarshal err: %v", err)
+	}
+	log.Printf("%s", ncpdpJson)
 }
