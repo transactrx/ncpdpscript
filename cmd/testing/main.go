@@ -22,5 +22,5 @@ func main() {
 	if err != nil {
 		log.Printf("Unamarshal err: %v", err)
 	}
-	log.Printf("%s", ncpdpJson)
+	log.Printf("NCPDP %s", ncpdpJson)
 }
