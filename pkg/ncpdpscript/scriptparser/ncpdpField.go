@@ -31,18 +31,6 @@ func newHeaderField(data []byte, fieldId string, fieldLength int) (*field, error
 	return &f, nil
 }
 
-//func (f *field) fixField() error {
-//	if f.fieldLength != nil {
-//		if len(f.fieldData) < *f.fieldLength {
-//			f.fieldData = fmt.Sprintf("%-*s", *f.fieldLength, string(f.data))
-//		}
-//		if len(f.fieldData) > *f.fieldLength {
-//			return fmt.Errorf("header field Id:%s is fixed length, but the data in it is too long. Max length is %d, current length is %d, %w", f.fieldId, f.fieldLength, len(f.data), NCPDPFormatError)
-//		}
-//	}
-//	return nil
-//}
-
 func (f *field) AsBytes() ([]byte, error) {
 	str, err := f.String()
 
