@@ -12,6 +12,15 @@ type segment struct {
 	header    bool
 }
 
+func DetermineTransactionType(data []byte) (string, error) {
+	seg, err := newSegmentHeader(data)
+	if err != nil {
+		return "", err
+	}
+	fld := seg.GetFieldById("transactionCode")
+
+	return fld.fieldData, nil
+}
 func newSegment(data []byte) (*segment, error) {
 	seg := segment{}
 	seg.fieldsMap = make(map[string]*field)
