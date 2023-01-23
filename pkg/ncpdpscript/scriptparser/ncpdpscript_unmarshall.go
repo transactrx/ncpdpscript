@@ -15,7 +15,7 @@ func Unmarshal(data []byte, v any) error {
 
 	msg, err := NewNCPDPMessage(data)
 	if err != nil {
-		log.Panic(err)
+		return err
 	}
 
 	indirectVal := reflect.Indirect(reflect.ValueOf(v))
