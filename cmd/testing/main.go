@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"gihub.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
-	"gihub.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages"
+	"github.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
+	"github.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages"
 	"log"
 )
 
