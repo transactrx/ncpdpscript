@@ -1,6 +1,6 @@
 package ncpdpscriptmessages
 
-import "gihub.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages/segments"
+import "github.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages/segments"
 
 type B1 struct {
 	Header    *segments.Header    `ncpdp:"0:header" json:"header"`

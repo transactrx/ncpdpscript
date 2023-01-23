@@ -1,6 +1,6 @@
 package segments
 
-import "gihub.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
+import "github.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
 
 type Header struct {
 	Bin                        *string `ncpdp:"header:bin" json:"bin"`
