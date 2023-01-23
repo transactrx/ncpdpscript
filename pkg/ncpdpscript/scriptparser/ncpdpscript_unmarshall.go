@@ -104,10 +104,10 @@ func populateGroup(indirectVal reflect.Value, groupIndex int, msg *ncpdpMessage)
 				field.Set(val)
 				indirectFieldVal := reflect.Indirect(field)
 				for i2 := 0; i2 < indirectFieldVal.Type().NumField(); i2++ {
-					log.Printf("%s - %v", indirectFieldVal.Type().Field(i2).Name, indirectFieldVal.Type().Field(i2).Tag)
+					//log.Printf("%s - %v", indirectFieldVal.Type().Field(i2).Name, indirectFieldVal.Type().Field(i2).Tag)
 					tag, ok := indirectFieldVal.Type().Field(i2).Tag.Lookup("ncpdp")
 					if ok {
-						log.Printf("tag to lookup:%s", tag)
+						//log.Printf("tag to lookup:%s", tag)
 						err := attachFieldValueToStruct(msg, tag, indirectFieldVal, i2, groupIndex)
 						if err != nil {
 							return err
@@ -115,7 +115,7 @@ func populateGroup(indirectVal reflect.Value, groupIndex int, msg *ncpdpMessage)
 					}
 				}
 				//reflect.Indirect(field).Type().Field(0).Tag
-				log.Printf("here")
+				//log.Printf("here")
 			}
 		}
 	}
@@ -126,7 +126,7 @@ func populateGroup(indirectVal reflect.Value, groupIndex int, msg *ncpdpMessage)
 func attachFieldValueToStruct(msg *ncpdpMessage, tag string, indirectFieldVal reflect.Value, fieldIndex int, groupId int) error {
 	ncpdpField, err := msg.groups[groupId].GetFieldById(tag)
 	if err == nil && ncpdpField != nil {
-		log.Printf("%+v", ncpdpField)
+		//log.Printf("%+v", ncpdpField)
 		fieldIsPointer := false
 		var fieldKind = indirectFieldVal.Type().Field(fieldIndex).Type.Kind()
 		if fieldKind == reflect.Slice {
