@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+
 type Header struct {
 	Bin                        string `ncpdp:"header:bin"`
 	VersionRel                 string `ncpdp:"header:versionRel"`
