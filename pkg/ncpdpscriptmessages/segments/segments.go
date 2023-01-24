@@ -139,3 +139,24 @@ type Prescriber struct {
 	PrescriberState              *string `ncpdp:"032N" json:"prescriberState"`
 	PrescriberZip                *string `ncpdp:"032P" json:"prescriberZip"`
 }
+
+//type Cob struct {
+//	SegmentID                            *string                    `ncpdp:"05AM" json:"segmentID"`
+//	OtherPayerIdCount                    *int64                     `ncpdp:"054C" json:"otherPayerIdCount"`
+//	OtherPayerCoverageType               []*string                  `ncpdp:"055C" json:"otherPayerCoverageType"`
+//	OtherPayerIdQualifier                []*string                  `ncpdp:"056C" json:"otherPayerIdQualifier"`
+//	OtherPayerId                         []*string                  `ncpdp:"057C" json:"otherPayerId"`
+//	OtherPayerDate                       []*string                  `ncpdp:"05E8" json:"otherPayerDate"`
+//	InternalControlNumber                []*string                  `ncpdp:"05A7" json:"internalControlNumber"`
+//	OtherPayerAmountPaidCount            *int64                     `ncpdp:"05HB" json:"otherPayerAmountPaidCount"`
+//	OtherPayerAmountPaidQualifier        []*string                  `ncpdp:"05HC" json:"otherPayerAmountPaidQualifier"`
+//	OtherPayerAmountPaid                 []*scriptparser.Currency64 `ncpdp:"05DV" json:"otherPayerAmountPaid"`
+//	OtherPayerRejectCount                *int64                     `ncpdp:"055E" json:"otherPayerRejectCount"`
+//	OtherPayerRejectCountCode            []*string                  `ncpdp:"056E" json:"otherPayerRejectCountCode"`
+//	OtherPayerPatientRespAmountCount     *int64                     `ncpdp:"05NR" json:"otherPayerPatientRespAmountCount"`
+//	OtherPayerPatientRespAmountQualifier []*string                  `ncpdp:"05NP" json:"otherPayerPatientRespAmountQualifier"`
+//	OtherPayerPatientRespAmount          []*scriptparser.Currency64 `ncpdp:"05NQ" json:"otherPayerPatientRespAmount"`
+//	BenefitStageCount                    *int64                     `ncpdp:"05MU" json:"benefitStageCount"`
+//	BenefitStageQualifier                []*string                  `ncpdp:"05MV" json:"benefitStageQualifier"`
+//	BenefitStageAmount                   []*scriptparser.Currency64 `ncpdp:"05MW" json:"benefitStageAmount"`
+//}

@@ -14,3 +14,13 @@ type B1Claim struct {
 	Pricing    *segments.Pricing    `ncpdp:":11" json:"pricing"`
 	Prescriber *segments.Prescriber `ncpdp:":03" json:"prescriber"`
 }
+
+type B2 struct {
+	Header    *segments.Header    `ncpdp:"0:header" json:"header"`
+	Insurance *segments.Insurance `ncpdp:"0:04" json:"insurance"`
+	Claims    []*B2Claim          `ncpdp:"" json:"claims"`
+}
+type B2Claim struct {
+	Claim   *segments.Claim   `ncpdp:":07" json:"claim"`
+	Pricing *segments.Pricing `ncpdp:":11" json:"pricing"`
+}

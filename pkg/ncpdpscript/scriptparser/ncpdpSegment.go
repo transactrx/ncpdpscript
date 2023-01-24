@@ -18,7 +18,7 @@ func DetermineTransactionType(data []byte) (string, error) {
 		return "", err
 	}
 	fld := seg.GetFieldById("transactionCode")
-	if len(fld.fieldData) < 1 || fld.fieldData != "B1" {
+	if len(fld.fieldData) < 1 || (fld.fieldData != "B1" && fld.fieldData != "B2") {
 		return "", fmt.Errorf("NCPDP transaction type %s not supported", fld.fieldData)
 	}
 
