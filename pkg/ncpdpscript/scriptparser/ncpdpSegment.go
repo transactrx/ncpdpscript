@@ -36,6 +36,61 @@ func newSegment(data []byte) (*segment, error) {
 
 	return &seg, nil
 }
+func newResponseSegmentHeader(data []byte) (*segment, error) {
+	seg := segment{header: true}
+	seg.id = "header"
+	seg.fieldsMap = make(map[string]*field)
+
+	versionRel := data[0:2]
+	transactionCode := data[2:4]
+	transactionCount := data[4:5]
+	transactionResponseStatus := data[5:6]
+	serviceProviderIdQualifier := data[6:8]
+	serviceProviderId := data[8:23]
+	dos := data[23:31]
+
+	field1, err := newHeaderField(versionRel, "versionRel", 2)
+	if err != nil {
+		return nil, err
+	}
+	seg.addField(field1)
+	field2, err := newHeaderField(transactionCode, "transactionCode", 2)
+	if err != nil {
+		return nil, err
+	}
+	seg.addField(field2)
+
+	field3, err := newHeaderField(transactionCount, "transactionCount", 1)
+	if err != nil {
+		return nil, err
+	}
+	seg.addField(field3)
+
+	field4, err := newHeaderField(transactionResponseStatus, "transactionResponseStatus", 1)
+	if err != nil {
+		return nil, err
+	}
+	seg.addField(field4)
+
+	field5, err := newHeaderField(serviceProviderIdQualifier, "serviceProviderIdQualifier", 2)
+	if err != nil {
+		return nil, err
+	}
+	seg.addField(field5)
+	field6, err := newHeaderField(serviceProviderId, "serviceProviderId", 15)
+	if err != nil {
+		return nil, err
+	}
+	seg.addField(field6)
+	field7, err := newHeaderField(dos, "dos", 8)
+	if err != nil {
+		return nil, err
+	}
+	seg.addField(field7)
+
+	return &seg, nil
+}
+
 func newSegmentHeader(data []byte) (*segment, error) {
 	seg := segment{header: true}
 	seg.id = "header"

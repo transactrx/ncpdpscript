@@ -12,7 +12,8 @@ type group struct {
 	segmentsMap   map[string]*segment
 }
 
-func newGroup(data []byte, groupPosition int) (*group, error) {
+func newGroup(data []byte, groupPosition int, trxType int) (*group, error) {
+
 	grp := group{groupPosition: groupPosition}
 	grp.segmentsMap = make(map[string]*segment)
 
@@ -20,7 +21,15 @@ func newGroup(data []byte, groupPosition int) (*group, error) {
 
 	for i, segBytes := range grpBytes {
 		if groupPosition == 0 && i == 0 {
-			seg, err := newSegmentHeader(segBytes)
+
+			var seg *segment
+			var err error
+			if trxType == B1RequestType || trxType == B2RequestType {
+				seg, err = newSegmentHeader(segBytes)
+			} else {
+				seg, err = newResponseSegmentHeader(segBytes)
+			}
+
 			if err != nil {
 				return nil, err
 			}
