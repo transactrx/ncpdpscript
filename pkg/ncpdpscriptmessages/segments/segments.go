@@ -2,12 +2,22 @@ package segments
 
 import "github.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
 
-type Header struct {
+type RequestHeader struct {
 	Bin                        *string `ncpdp:"header:bin" json:"bin"`
 	VersionRel                 *string `ncpdp:"header:versionRel" json:"versionRel"`
 	TransactionCode            *string `ncpdp:"header:transactionCode" json:"transactionCode"`
 	Pcn                        *string `ncpdp:"header:pcn" json:"pcn"`
 	TransactionCount           *int    `ncpdp:"header:transactionCount" json:"transactionCount"`
+	ServiceProviderIdQualifier *string `ncpdp:"header:serviceProviderIdQualifier" json:"serviceProviderIdQualifier"`
+	ServiceProviderId          *string `ncpdp:"header:serviceProviderId" json:"serviceProviderId"`
+	Dos                        *string `ncpdp:"header:dos" json:"dos"`
+}
+
+type ResponseHeader struct {
+	VersionRel                 *string `ncpdp:"header:versionRel" json:"versionRel"`
+	TransactionCode            *string `ncpdp:"header:transactionCode" json:"transactionCode"`
+	TransactionCount           *int    `ncpdp:"header:transactionCount" json:"transactionCount"`
+	TransactionReponseStatus   *string `ncpdp:"transactionReponseStatus" json:"transactionReponseStatus"`
 	ServiceProviderIdQualifier *string `ncpdp:"header:serviceProviderIdQualifier" json:"serviceProviderIdQualifier"`
 	ServiceProviderId          *string `ncpdp:"header:serviceProviderId" json:"serviceProviderId"`
 	Dos                        *string `ncpdp:"header:dos" json:"dos"`
@@ -138,6 +148,31 @@ type Prescriber struct {
 	PrescriberCity               *string `ncpdp:"032M" json:"prescriberCity"`
 	PrescriberState              *string `ncpdp:"032N" json:"prescriberState"`
 	PrescriberZip                *string `ncpdp:"032P" json:"prescriberZip"`
+}
+
+type Message struct {
+	SegmentID *string `ncpdp:"20AM" json:"segmentID"`
+	Message   *string `ncpdp:"20F4" json:"message"`
+}
+
+type ResponseStatus struct {
+	SegmentID                       *string   `ncpdp:"21AM" json:"segmentID"`
+	TransactionReponseStatus        *string   `ncpdp:"21AN" json:"transactionReponseStatus"`
+	AuthorizationNumber             *string   `ncpdp:"21F3" json:"authorizationNumber"`
+	RejectCount                     *int64    `ncpdp:"21FA" json:"rejectCount"`
+	RejectCode                      []*string `ncpdp:"21FB" json:"rejectCode"`
+	RejectFieldOccuranceIndicator   *string   `ncpdp:"214F" json:"rejectFieldOccuranceIndicator"`
+	ApprovedMessageCodeCount        *int64    `ncpdp:"215F" json:"approvedMessageCodeCount"`
+	ApprovedMessageCode             *string   `ncpdp:"216F" json:"approvedMessageCode"`
+	AdditionalMessageInfoCount      *int64    `ncpdp:"21UF" json:"additionalMessageInfoCount"`
+	AdditionalMessageInfoQualifier  []*string `ncpdp:"21UH" json:"additionalMessageInfoQualifier"`
+	AdditionalMessageInfo           []*string `ncpdp:"21FQ" json:"additionalMessageInfo"`
+	AdditionalMessageInfoContinuity []*string `ncpdp:"21UG" json:"additionalMessageInfoContinuity"`
+	HelpDeskPhoneNumberQualifier    *string   `ncpdp:"217F" json:"helpDeskPhoneNumberQualifier"`
+	HelpDeskPhoneNumber             *string   `ncpdp:"218F" json:"helpDeskPhoneNumber"`
+	TransactionReferenceNumber      *string   `ncpdp:"21K5" json:"transactionReferenceNumber"`
+	InternalControlNumber           *string   `ncpdp:"21A7" json:"internalControlNumber"`
+	Url                             *string   `ncpdp:"21MA" json:"url"`
 }
 
 //type Cob struct {
