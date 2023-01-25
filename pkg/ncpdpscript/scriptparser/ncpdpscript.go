@@ -20,10 +20,18 @@ type Float interface {
 	float64 | float32 | Currency32 | Currency64
 }
 
+const (
+	B1RequestType = iota
+	B1ResponseType
+	B2RequestType
+	B2ResponseType
+)
+
 var NCPDPFormatError = errors.New("NCPDP format error")
 var NCPDPSegmentNotFound = errors.New("segment not found by given id")
 var NCPDPFieldNotFound = errors.New("field not found in segment by given id")
 var RequestStructInvalid = errors.New("the structure passed for marshalling or unmarshalling is invalid")
+var NCPDPMessageInvalidOrUnsupported = errors.New("the NCPDP message is invalid or unsupported.  Currently support only exist for b1 and b2 request and response messages")
 
 const SegmentSeparator = "\u001E"
 const GroupSeparator = "\u001D"
@@ -185,4 +193,24 @@ func renderNCPDPCurrencyString[T Float](value T) string {
 	//remove negatives
 	return strings.TrimPrefix(res, "-")
 
+}
+
+func DetermineTransactionType(data []byte) (int, error) {
+
+	//check if response object
+	headerInfo := string(data[0:4])
+	if headerInfo == "D0B1" {
+		return B1ResponseType, nil
+	}
+	if headerInfo == "D0B2" {
+		return B2ResponseType, nil
+	}
+	headerInfo = string(data[6:10])
+	if headerInfo == "D0B1" {
+		return B1RequestType, nil
+	}
+	if headerInfo == "D0B2" {
+		return B2RequestType, nil
+	}
+	return 0, NCPDPMessageInvalidOrUnsupported
 }

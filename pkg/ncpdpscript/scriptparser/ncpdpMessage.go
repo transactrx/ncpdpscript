@@ -30,10 +30,15 @@ func NewNCPDPMessage(data []byte) (*ncpdpMessage, error) {
 }
 func (msg *ncpdpMessage) Parse(data []byte) error {
 
+	trxType, err := DetermineTransactionType(data)
+	if err != nil {
+		log.Printf("Unamarshal err: %v", err)
+	}
+
 	groups := bytes.Split(data, []byte(GroupSeparator))
 
 	for i, groupData := range groups {
-		grp, err := newGroup(groupData, i)
+		grp, err := newGroup(groupData, i, trxType)
 		if err != nil {
 			return err
 		}
@@ -59,8 +64,7 @@ func (msg *ncpdpMessage) String() (string, error) {
 	return result, nil
 }
 
-func (msg *ncpdpMessage) Validate(data []byte) (bool, string) {
-
+func (msg *ncpdpMessage) ValidateRequest(data []byte) (bool, string) {
 	okMessage := true
 	errorMessage := ""
 	if data[56] != SegmentSeparatorByte || data[57] != FieldSeparatorByte {
@@ -85,10 +89,44 @@ func (msg *ncpdpMessage) Validate(data []byte) (bool, string) {
 		okMessage = false
 		errorMessage = "Date of Service must be a date"
 	}
-
 	return okMessage, errorMessage
-
 }
+
+func (msg *ncpdpMessage) ValidateResponse(data []byte) (bool, string) {
+	okMessage := true
+	errorMessage := ""
+	if data[31] != SegmentSeparatorByte || data[32] != FieldSeparatorByte {
+		errorMessage = "Bad structure, first segment is expected at char 57, but it is not"
+		okMessage = false
+	}
+
+	transactionCount := data[4:5]
+	if !isNumber(transactionCount) {
+		okMessage = false
+		errorMessage = "transaction count must be numeric"
+	}
+
+	dos := data[23:31]
+	if !isDate(dos) {
+		okMessage = false
+		errorMessage = "Date of Service must be a date"
+	}
+	return okMessage, errorMessage
+}
+
+func (msg *ncpdpMessage) Validate(data []byte) (bool, string) {
+
+	transactionType, err := DetermineTransactionType(data)
+	if err != nil {
+		return false, err.Error()
+	}
+	if transactionType == B1RequestType || transactionType == B2RequestType {
+		return msg.ValidateRequest(data)
+	} else {
+		return msg.ValidateResponse(data)
+	}
+}
+
 func (msg *ncpdpMessage) isGroupPresent(group int) bool {
 	if len(msg.groups)-1 < group {
 		return false
@@ -104,7 +142,6 @@ func (msg *ncpdpMessage) isSegmentPresent(group int, segmentId string) bool {
 	}
 
 	return false
-
 }
 
 func (msg *ncpdpMessage) isSegmentPresentByTag(identifier string) bool {
