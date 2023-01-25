@@ -12,18 +12,6 @@ type segment struct {
 	header    bool
 }
 
-func DetermineTransactionType(data []byte) (string, error) {
-	seg, err := newSegmentHeader(data)
-	if err != nil {
-		return "", err
-	}
-	fld := seg.GetFieldById("transactionCode")
-	if len(fld.fieldData) < 1 || (fld.fieldData != "B1" && fld.fieldData != "B2") {
-		return "", fmt.Errorf("NCPDP transaction type %s not supported", fld.fieldData)
-	}
-
-	return fld.fieldData, nil
-}
 func newSegment(data []byte) (*segment, error) {
 	seg := segment{}
 	seg.fieldsMap = make(map[string]*field)

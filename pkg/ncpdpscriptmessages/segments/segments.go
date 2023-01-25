@@ -17,7 +17,7 @@ type ResponseHeader struct {
 	VersionRel                 *string `ncpdp:"header:versionRel" json:"versionRel"`
 	TransactionCode            *string `ncpdp:"header:transactionCode" json:"transactionCode"`
 	TransactionCount           *int    `ncpdp:"header:transactionCount" json:"transactionCount"`
-	TransactionReponseStatus   *string `ncpdp:"transactionReponseStatus" json:"transactionReponseStatus"`
+	TransactionResponseStatus  *string `ncpdp:"transactionResponseStatus" json:"transactionResponseStatus"`
 	ServiceProviderIdQualifier *string `ncpdp:"header:serviceProviderIdQualifier" json:"serviceProviderIdQualifier"`
 	ServiceProviderId          *string `ncpdp:"header:serviceProviderId" json:"serviceProviderId"`
 	Dos                        *string `ncpdp:"header:dos" json:"dos"`
