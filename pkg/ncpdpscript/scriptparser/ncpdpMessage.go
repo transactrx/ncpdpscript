@@ -67,7 +67,13 @@ func (msg *ncpdpMessage) String() (string, error) {
 func (msg *ncpdpMessage) ValidateRequest(data []byte) (bool, string) {
 	okMessage := true
 	errorMessage := ""
-	if data[56] != SegmentSeparatorByte || data[57] != FieldSeparatorByte {
+	if data[56] == GroupSeparatorByte {
+		if data[57] != SegmentSeparatorByte || data[58] != FieldSeparatorByte {
+			errorMessage = "Bad Response structure, first segment is expected at char 57, but it is not"
+			okMessage = false
+		}
+
+	} else if data[56] != SegmentSeparatorByte || data[57] != FieldSeparatorByte {
 		errorMessage = "Bad Request structure, first segment is expected at char 57, but it is not"
 		okMessage = false
 	}
@@ -129,7 +135,6 @@ func (msg *ncpdpMessage) Validate(data []byte) (bool, string) {
 	if transactionType == B1RequestType || transactionType == B2RequestType {
 		return msg.ValidateRequest(data)
 	} else {
-		//return true, ""
 		return msg.ValidateResponse(data)
 	}
 }
