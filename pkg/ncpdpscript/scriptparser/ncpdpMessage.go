@@ -68,7 +68,7 @@ func (msg *ncpdpMessage) ValidateRequest(data []byte) (bool, string) {
 	okMessage := true
 	errorMessage := ""
 	if data[56] != SegmentSeparatorByte || data[57] != FieldSeparatorByte {
-		errorMessage = "Bad structure, first segment is expected at char 57, but it is not"
+		errorMessage = "Bad Request structure, first segment is expected at char 57, but it is not"
 		okMessage = false
 	}
 	bin := data[0:6]
@@ -95,8 +95,14 @@ func (msg *ncpdpMessage) ValidateRequest(data []byte) (bool, string) {
 func (msg *ncpdpMessage) ValidateResponse(data []byte) (bool, string) {
 	okMessage := true
 	errorMessage := ""
-	if data[31] != SegmentSeparatorByte || data[32] != FieldSeparatorByte {
-		errorMessage = "Bad structure, first segment is expected at char 57, but it is not"
+	if data[31] == GroupSeparatorByte {
+		if data[32] != SegmentSeparatorByte || data[33] != FieldSeparatorByte {
+			errorMessage = "Bad Response structure, first segment is expected at char 31, but it is not"
+			okMessage = false
+		}
+
+	} else if data[31] != SegmentSeparatorByte || data[32] != FieldSeparatorByte {
+		errorMessage = "Bad Response structure, first segment is expected at char 31, but it is not"
 		okMessage = false
 	}
 
@@ -123,6 +129,7 @@ func (msg *ncpdpMessage) Validate(data []byte) (bool, string) {
 	if transactionType == B1RequestType || transactionType == B2RequestType {
 		return msg.ValidateRequest(data)
 	} else {
+		//return true, ""
 		return msg.ValidateResponse(data)
 	}
 }
