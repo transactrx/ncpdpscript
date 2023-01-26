@@ -40,7 +40,7 @@ func parseB2Response(ncpdpBytes []byte) {
 	}
 
 	isAccepted := ncpdpscriptmessages.IsTransactionB2ResponseAccepted(msg)
-	log.Printf("IsTransactionB2ResponseAccepted: %s", isAccepted)
+	log.Printf("IsTransactionB2ResponseAccepted: %t", isAccepted)
 	ncpdpJson, err := json.Marshal(msg)
 	if err != nil {
 		log.Printf("Unamarshal err: %v", err)
@@ -58,7 +58,7 @@ func parseB1Response(ncpdpBytes []byte) {
 	}
 
 	isAccepted := ncpdpscriptmessages.IsTransactionB1ResponseAccepted(msg)
-	log.Printf("IsTransactionB1ResponseAccepted: %s", isAccepted)
+	log.Printf("IsTransactionB1ResponseAccepted: %t", isAccepted)
 
 	ncpdpJson, err := json.Marshal(msg)
 	if err != nil {
