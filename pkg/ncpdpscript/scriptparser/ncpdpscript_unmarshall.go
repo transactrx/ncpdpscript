@@ -3,7 +3,6 @@ package scriptparser
 import (
 	"errors"
 	"fmt"
-	"log"
 	"reflect"
 	"strings"
 )
@@ -35,13 +34,13 @@ func Unmarshal(data []byte, v any) error {
 	}
 	//find the slice if it exists and populate it with the additional groups
 	additionalGroupsPresent := false
-	var additionalGroupsTagId string
+	//var additionalGroupsTagId string
 	additionalGroupFieldIndex := -1
 	for i := 0; i < indirectVal.NumField(); i++ {
 		field := indirectVal.Field(i)
 		if field.Kind() == reflect.Slice {
 			ok := false
-			additionalGroupsTagId, ok = indirectVal.Type().Field(i).Tag.Lookup("ncpdp")
+			_, ok = indirectVal.Type().Field(i).Tag.Lookup("ncpdp")
 			if ok {
 				additionalGroupsPresent = true
 				additionalGroupFieldIndex = i
@@ -53,7 +52,7 @@ func Unmarshal(data []byte, v any) error {
 	if additionalGroupsPresent {
 		groupIndex = 1
 		for msg.isGroupPresent(groupIndex) {
-			log.Printf("%v %v %v", additionalGroupsTagId, additionalGroupsTagId, additionalGroupFieldIndex)
+			//log.Printf("%v %v %v", additionalGroupsTagId, additionalGroupsTagId, additionalGroupFieldIndex)
 			var newGroup reflect.Value
 			nElem := indirectVal.Field(additionalGroupFieldIndex).Type().Elem()
 			strucIsPointer := false
@@ -61,7 +60,7 @@ func Unmarshal(data []byte, v any) error {
 				strucIsPointer = true
 				nElem = nElem.Elem()
 			}
-			log.Printf("%v", strucIsPointer)
+			//log.Printf("%v", strucIsPointer)
 			newGroup = reflect.New(nElem).Elem()
 			newIndirectVal := reflect.Indirect(newGroup)
 			errPop := populateGroup(newIndirectVal, groupIndex, msg)

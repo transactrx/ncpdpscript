@@ -2,7 +2,6 @@ package ncpdpscriptmessages
 
 import (
 	"github.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages/segments"
-	"log"
 )
 
 type B1Request struct {
@@ -53,8 +52,8 @@ func IsTransactionB1ResponseAccepted(msg B1Response) bool {
 		if msg.Claims[0].ResponseStatus.TransactionReponseStatus != nil && header.TransactionResponseStatus != nil {
 			claimStatus := *msg.Claims[0].ResponseStatus.TransactionReponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
-			log.Printf("-> claim.Status: %s", claimStatus)
-			log.Printf("-> header.Status: %s", headerReponseStatus)
+			//log.Printf("-> claim.Status: %s", claimStatus)
+			//log.Printf("-> header.Status: %s", headerReponseStatus)
 			if (claimStatus == "P" || claimStatus == "D") && headerReponseStatus == "A" {
 				result = true
 			}
@@ -69,8 +68,8 @@ func IsTransactionB2ResponseAccepted(msg B2Response) bool {
 		if msg.Claims[0].ResponseStatus.TransactionReponseStatus != nil && header.TransactionResponseStatus != nil {
 			claimStatus := *msg.Claims[0].ResponseStatus.TransactionReponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
-			log.Printf("-> claim.Status: %s", claimStatus)
-			log.Printf("-> header.Status: %s", headerReponseStatus)
+			//log.Printf("-> claim.Status: %s", claimStatus)
+			//log.Printf("-> header.Status: %s", headerReponseStatus)
 			if claimStatus == "A" && headerReponseStatus == "A" {
 				result = true
 			}
