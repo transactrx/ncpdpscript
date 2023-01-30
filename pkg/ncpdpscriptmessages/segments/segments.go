@@ -68,49 +68,49 @@ type Patient struct {
 }
 
 type RequestClaim struct {
-	SegmentID                             *string   `ncpdp:"07AM" json:"segmentID"`
-	RxServiceQualifier                    *string   `ncpdp:"07EM" json:"rxServiceQualifier"`
-	RxServiceReferenceNumber              *string   `ncpdp:"07D2" json:"rxServiceReferenceNumber"`
-	ProductServiceQualifier               *string   `ncpdp:"07E1" json:"productServiceQualifier"`
-	ProductServiceID                      *string   `ncpdp:"07D7" json:"productServiceID"`
-	AssociatedRxServiceRefNum             *string   `ncpdp:"07EN" json:"associatedRxServiceRefNum"`
-	AssociatedRxServiceDate               *string   `ncpdp:"07EP" json:"associatedRxServiceDate"`
-	ProcedureModifierCount                *int      `ncpdp:"07SE" json:"procedureModifierCount"`
-	ProcedureModifierCode                 []*string `ncpdp:"07ER" json:"procedureModifierCode"`
-	QuantityDispensed                     *float64  `ncpdp:"07E7" json:"quantityDispensed"`
-	FillNumber                            *int      `ncpdp:"07D3" json:"fillNumber"`
-	DaysSupply                            *int      `ncpdp:"07D5" json:"daysSupply"`
-	CompoundCode                          *int      `ncpdp:"07D6" json:"compoundCode"`
-	DispenseAsWritten                     *int      `ncpdp:"07D8" json:"dispenseAsWritten"`
-	DateWritten                           *string   `ncpdp:"07DE" json:"dateWritten"`
-	NumberOfRefillsAuthorized             *int      `ncpdp:"07DF" json:"numberOfRefillsAuthorized"`
-	RxOriginCode                          *int      `ncpdp:"07DJ" json:"rxOriginCode"`
-	SubmissionClarificationCodeCount      *int      `ncpdp:"07NX" json:"submissionClarificationCodeCount"`
-	SubmissionClarificationCode           []*int    `ncpdp:"07DK" json:"submissionClarificationCode"`
-	QuantityPrescriber                    *float64  `ncpdp:"07ET" json:"quantityPrescriber"`
-	OtherCoverageCode                     *int      `ncpdp:"07C8" json:"otherCoverageCode"`
-	UnitDoseIndicator                     *int      `ncpdp:"07DT" json:"unitDoseIndicator"`
-	OrigPrescribedProductServiceQualifier *int      `ncpdp:"07EJ" json:"origPrescribedProductServiceQualifier"`
-	OrigPrescribedProductServiceCode      *string   `ncpdp:"07EA" json:"origPrescribedProductServiceCode"`
-	OrigPrescribedQuantity                *float64  `ncpdp:"07EB" json:"origPrescribedQuantity"`
-	AlternateID                           *string   `ncpdp:"07CW" json:"alternateID"`
-	ScheduledRxID                         *string   `ncpdp:"07EK" json:"scheduledRxID"`
-	UnitOfMeasure                         *string   `ncpdp:"0728" json:"unitOfMeasure"`
-	LevelOfService                        *string   `ncpdp:"07DI" json:"levelOfService"`
-	PriorAuthorizationTypeCode            *int      `ncpdp:"07EU" json:"priorAuthorizationTypeCode"`
-	PriorAuthorizationNumberSubmitted     *string   `ncpdp:"07EV" json:"priorAuthorizationNumberSubmitted"`
-	IntermediaryAuthorizionTypeID         *string   `ncpdp:"07EW" json:"intermediaryAuthorizionTypeID"`
-	IntermediaryAuthorizionID             *string   `ncpdp:"07EX" json:"intermediaryAuthorizionID"`
-	DispensingStatus                      *string   `ncpdp:"07HD" json:"dispensingStatus"`
-	QuantityIntendedToBeDispersed         *int      `ncpdp:"07HF" json:"quantityIntendedToBeDispersed"`
-	DaysSupplyIntendedToBeDispersed       *int      `ncpdp:"07HG" json:"daysSupplyIntendedToBeDispersed"`
-	DelayReasonCode                       *string   `ncpdp:"07NV" json:"delayReasonCode"`
-	TransactionReferenceNumber            *string   `ncpdp:"07K5" json:"transactionReferenceNumber"`
-	PatientAssignmentIndicator            *string   `ncpdp:"07MT" json:"patientAssignmentIndicator"`
-	RouteOfAdministration                 *string   `ncpdp:"07E2" json:"routeOfAdministration"`
-	CompoundType                          *string   `ncpdp:"07G1" json:"compoundType"`
-	TransactionCtrlNumber                 *string   `ncpdp:"07N4" json:"transactionCtrlNumber"`
-	PharmacyServiceType                   *string   `ncpdp:"07U7" json:"pharmacyServiceType"`
+	SegmentID                             *string                       `ncpdp:"07AM" json:"segmentID"`
+	RxServiceQualifier                    *string                       `ncpdp:"07EM" json:"rxServiceQualifier"`
+	RxServiceReferenceNumber              *string                       `ncpdp:"07D2" json:"rxServiceReferenceNumber"`
+	ProductServiceQualifier               *string                       `ncpdp:"07E1" json:"productServiceQualifier"`
+	ProductServiceID                      *string                       `ncpdp:"07D7" json:"productServiceID"`
+	AssociatedRxServiceRefNum             *string                       `ncpdp:"07EN" json:"associatedRxServiceRefNum"`
+	AssociatedRxServiceDate               *string                       `ncpdp:"07EP" json:"associatedRxServiceDate"`
+	ProcedureModifierCount                *int                          `ncpdp:"07SE" json:"procedureModifierCount"`
+	ProcedureModifierCode                 []*string                     `ncpdp:"07ER" json:"procedureModifierCode"`
+	QuantityDispensed                     *scriptparser.UnsignedNumeric `ncpdp:"07E7" json:"quantityDispensed"`
+	FillNumber                            *int                          `ncpdp:"07D3" json:"fillNumber"`
+	DaysSupply                            *int                          `ncpdp:"07D5" json:"daysSupply"`
+	CompoundCode                          *int                          `ncpdp:"07D6" json:"compoundCode"`
+	DispenseAsWritten                     *int                          `ncpdp:"07D8" json:"dispenseAsWritten"`
+	DateWritten                           *string                       `ncpdp:"07DE" json:"dateWritten"`
+	NumberOfRefillsAuthorized             *int                          `ncpdp:"07DF" json:"numberOfRefillsAuthorized"`
+	RxOriginCode                          *int                          `ncpdp:"07DJ" json:"rxOriginCode"`
+	SubmissionClarificationCodeCount      *int                          `ncpdp:"07NX" json:"submissionClarificationCodeCount"`
+	SubmissionClarificationCode           []*int                        `ncpdp:"07DK" json:"submissionClarificationCode"`
+	QuantityPrescriber                    *scriptparser.UnsignedNumeric `ncpdp:"07ET" json:"quantityPrescriber"`
+	OtherCoverageCode                     *int                          `ncpdp:"07C8" json:"otherCoverageCode"`
+	UnitDoseIndicator                     *int                          `ncpdp:"07DT" json:"unitDoseIndicator"`
+	OrigPrescribedProductServiceQualifier *int                          `ncpdp:"07EJ" json:"origPrescribedProductServiceQualifier"`
+	OrigPrescribedProductServiceCode      *string                       `ncpdp:"07EA" json:"origPrescribedProductServiceCode"`
+	OrigPrescribedQuantity                *scriptparser.UnsignedNumeric `ncpdp:"07EB" json:"origPrescribedQuantity"`
+	AlternateID                           *string                       `ncpdp:"07CW" json:"alternateID"`
+	ScheduledRxID                         *string                       `ncpdp:"07EK" json:"scheduledRxID"`
+	UnitOfMeasure                         *string                       `ncpdp:"0728" json:"unitOfMeasure"`
+	LevelOfService                        *string                       `ncpdp:"07DI" json:"levelOfService"`
+	PriorAuthorizationTypeCode            *int                          `ncpdp:"07EU" json:"priorAuthorizationTypeCode"`
+	PriorAuthorizationNumberSubmitted     *string                       `ncpdp:"07EV" json:"priorAuthorizationNumberSubmitted"`
+	IntermediaryAuthorizionTypeID         *string                       `ncpdp:"07EW" json:"intermediaryAuthorizionTypeID"`
+	IntermediaryAuthorizionID             *string                       `ncpdp:"07EX" json:"intermediaryAuthorizionID"`
+	DispensingStatus                      *string                       `ncpdp:"07HD" json:"dispensingStatus"`
+	QuantityIntendedToBeDispersed         *scriptparser.UnsignedNumeric `ncpdp:"07HF" json:"quantityIntendedToBeDispersed"`
+	DaysSupplyIntendedToBeDispersed       *int                          `ncpdp:"07HG" json:"daysSupplyIntendedToBeDispersed"`
+	DelayReasonCode                       *string                       `ncpdp:"07NV" json:"delayReasonCode"`
+	TransactionReferenceNumber            *string                       `ncpdp:"07K5" json:"transactionReferenceNumber"`
+	PatientAssignmentIndicator            *string                       `ncpdp:"07MT" json:"patientAssignmentIndicator"`
+	RouteOfAdministration                 *string                       `ncpdp:"07E2" json:"routeOfAdministration"`
+	CompoundType                          *string                       `ncpdp:"07G1" json:"compoundType"`
+	TransactionCtrlNumber                 *string                       `ncpdp:"07N4" json:"transactionCtrlNumber"`
+	PharmacyServiceType                   *string                       `ncpdp:"07U7" json:"pharmacyServiceType"`
 }
 
 type Pricing struct {
@@ -156,23 +156,23 @@ type Message struct {
 }
 
 type ResponseStatus struct {
-	SegmentID                       *string `ncpdp:"21AM" json:"segmentID"`
-	TransactionReponseStatus        *string `ncpdp:"21AN" json:"transactionReponseStatus"`
-	AuthorizationNumber             *string `ncpdp:"21F3" json:"authorizationNumber"`
-	RejectCount                     *int    `ncpdp:"21FA" json:"rejectCount"`
-	RejectCode                      *string `ncpdp:"21FB" json:"rejectCode"`
-	RejectFieldOccuranceIndicator   *string `ncpdp:"214F" json:"rejectFieldOccuranceIndicator"`
-	ApprovedMessageCodeCount        *int    `ncpdp:"215F" json:"approvedMessageCodeCount"`
-	ApprovedMessageCode             *string `ncpdp:"216F" json:"approvedMessageCode"`
-	AdditionalMessageInfoCount      *int    `ncpdp:"21UF" json:"additionalMessageInfoCount"`
-	AdditionalMessageInfoQualifier  *string `ncpdp:"21UH" json:"additionalMessageInfoQualifier"`
-	AdditionalMessageInfo           *string `ncpdp:"21FQ" json:"additionalMessageInfo"`
-	AdditionalMessageInfoContinuity *string `ncpdp:"21UG" json:"additionalMessageInfoContinuity"`
-	HelpDeskPhoneNumberQualifier    *string `ncpdp:"217F" json:"helpDeskPhoneNumberQualifier"`
-	HelpDeskPhoneNumber             *string `ncpdp:"218F" json:"helpDeskPhoneNumber"`
-	TransactionReferenceNumber      *string `ncpdp:"21K5" json:"transactionReferenceNumber"`
-	InternalControlNumber           *string `ncpdp:"21A7" json:"internalControlNumber"`
-	Url                             *string `ncpdp:"21MA" json:"url"`
+	SegmentID                       *string   `ncpdp:"21AM" json:"segmentID"`
+	TransactionResponseStatus       *string   `ncpdp:"21AN" json:"transactionResponseStatus"`
+	AuthorizationNumber             *string   `ncpdp:"21F3" json:"authorizationNumber"`
+	RejectCount                     *int      `ncpdp:"21FA" json:"rejectCount"`
+	RejectCode                      []*string `ncpdp:"21FB" json:"rejectCode"`
+	RejectFieldOccuranceIndicator   *string   `ncpdp:"214F" json:"rejectFieldOccuranceIndicator"`
+	ApprovedMessageCodeCount        *int      `ncpdp:"215F" json:"approvedMessageCodeCount"`
+	ApprovedMessageCode             *string   `ncpdp:"216F" json:"approvedMessageCode"`
+	AdditionalMessageInfoCount      *int      `ncpdp:"21UF" json:"additionalMessageInfoCount"`
+	AdditionalMessageInfoQualifier  *string   `ncpdp:"21UH" json:"additionalMessageInfoQualifier"`
+	AdditionalMessageInfo           *string   `ncpdp:"21FQ" json:"additionalMessageInfo"`
+	AdditionalMessageInfoContinuity *string   `ncpdp:"21UG" json:"additionalMessageInfoContinuity"`
+	HelpDeskPhoneNumberQualifier    *string   `ncpdp:"217F" json:"helpDeskPhoneNumberQualifier"`
+	HelpDeskPhoneNumber             *string   `ncpdp:"218F" json:"helpDeskPhoneNumber"`
+	TransactionReferenceNumber      *string   `ncpdp:"21K5" json:"transactionReferenceNumber"`
+	InternalControlNumber           *string   `ncpdp:"21A7" json:"internalControlNumber"`
+	Url                             *string   `ncpdp:"21MA" json:"url"`
 }
 
 type ResponseClaim struct {

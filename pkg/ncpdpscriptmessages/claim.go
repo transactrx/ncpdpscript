@@ -49,12 +49,12 @@ func IsTransactionB1ResponseAccepted(msg B1Response) bool {
 	var result = false
 	header := msg.Header
 	if msg.Claims != nil && len(msg.Claims) > 0 && header != nil {
-		if msg.Claims[0].ResponseStatus.TransactionReponseStatus != nil && header.TransactionResponseStatus != nil {
-			claimStatus := *msg.Claims[0].ResponseStatus.TransactionReponseStatus
+		if msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
+			claimStatus := *msg.Claims[0].ResponseStatus.TransactionResponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
 			//log.Printf("-> claim.Status: %s", claimStatus)
 			//log.Printf("-> header.Status: %s", headerReponseStatus)
-			if (claimStatus == "P" || claimStatus == "D") && headerReponseStatus == "A" {
+			if (claimStatus == "A" || claimStatus == "C" || claimStatus == "D" || claimStatus == "P" || claimStatus == "Q") && headerReponseStatus == "A" {
 				result = true
 			}
 		}
@@ -65,8 +65,8 @@ func IsTransactionB2ResponseAccepted(msg B2Response) bool {
 	var result = false
 	header := msg.Header
 	if msg.Claims != nil && len(msg.Claims) > 0 && header != nil {
-		if msg.Claims[0].ResponseStatus.TransactionReponseStatus != nil && header.TransactionResponseStatus != nil {
-			claimStatus := *msg.Claims[0].ResponseStatus.TransactionReponseStatus
+		if msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
+			claimStatus := *msg.Claims[0].ResponseStatus.TransactionResponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
 			//log.Printf("-> claim.Status: %s", claimStatus)
 			//log.Printf("-> header.Status: %s", headerReponseStatus)

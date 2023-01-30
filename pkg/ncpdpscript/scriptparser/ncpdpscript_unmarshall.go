@@ -215,6 +215,16 @@ func attachValueToField(fieldKind reflect.Kind, fieldTypeName string, fieldIsPoi
 				}
 			}
 			return flErr
+		} else if fieldTypeName == "UnsignedNumeric" {
+			fl32Val, flErr := ncpdpField.UnsignedNumeric()
+			if flErr == nil {
+				if fieldIsPointer {
+					indirectFieldVal.Field(fieldIndex).Set(reflect.ValueOf(fl32Val))
+				} else {
+					indirectFieldVal.Field(fieldIndex).Set(reflect.ValueOf(*fl32Val))
+				}
+			}
+			return flErr
 		} else {
 			fl32Val, flErr := ncpdpField.Float32()
 			if flErr == nil {
