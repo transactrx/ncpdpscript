@@ -82,6 +82,19 @@ func (f *field) int() (*int, error) {
 	return &result, err
 }
 
+func (f *field) UnsignedNumeric() (*UnsignedNumeric, error) {
+	if f.fieldData == "" {
+		return nil, nil
+	}
+	fl32, err := parseUnsignedNumericFromString(f.fieldData)
+	if err != nil {
+		return nil, err
+	}
+	result := UnsignedNumeric(*fl32)
+
+	return &result, nil
+}
+
 func (f *field) Currency32() (*Currency32, error) {
 	if f.fieldData == "" {
 		return nil, nil

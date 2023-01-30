@@ -42,6 +42,24 @@ const FieldSeparatorByte = 28
 
 type Currency32 float32
 type Currency64 float64
+type UnsignedNumeric float32 //9(7)v999 Format=9999999.999
+
+// metric decimal units
+func parseUnsignedNumericFromString(value string) (*UnsignedNumeric, error) {
+
+	if value == "" {
+		t := UnsignedNumeric(0.0)
+		return &t, nil
+	}
+
+	tResult, err := strconv.ParseFloat(value, 32)
+	if err != nil {
+		return nil, err
+	}
+	result := UnsignedNumeric(tResult / 1000)
+
+	return &result, nil
+}
 
 func parseNCPDPCurrencyString(value string, bit int) (*Currency64, error) {
 
