@@ -156,23 +156,23 @@ type Message struct {
 }
 
 type ResponseStatus struct {
-	SegmentID                       *string   `ncpdp:"21AM" json:"segmentID"`
-	TransactionResponseStatus       *string   `ncpdp:"21AN" json:"transactionResponseStatus"`
-	AuthorizationNumber             *string   `ncpdp:"21F3" json:"authorizationNumber"`
-	RejectCount                     *int      `ncpdp:"21FA" json:"rejectCount"`
-	RejectCode                      []*string `ncpdp:"21FB" json:"rejectCode"`
-	RejectFieldOccuranceIndicator   *string   `ncpdp:"214F" json:"rejectFieldOccuranceIndicator"`
-	ApprovedMessageCodeCount        *int      `ncpdp:"215F" json:"approvedMessageCodeCount"`
-	ApprovedMessageCode             *string   `ncpdp:"216F" json:"approvedMessageCode"`
-	AdditionalMessageInfoCount      *int      `ncpdp:"21UF" json:"additionalMessageInfoCount"`
-	AdditionalMessageInfoQualifier  *string   `ncpdp:"21UH" json:"additionalMessageInfoQualifier"`
-	AdditionalMessageInfo           *string   `ncpdp:"21FQ" json:"additionalMessageInfo"`
-	AdditionalMessageInfoContinuity *string   `ncpdp:"21UG" json:"additionalMessageInfoContinuity"`
-	HelpDeskPhoneNumberQualifier    *string   `ncpdp:"217F" json:"helpDeskPhoneNumberQualifier"`
-	HelpDeskPhoneNumber             *string   `ncpdp:"218F" json:"helpDeskPhoneNumber"`
-	TransactionReferenceNumber      *string   `ncpdp:"21K5" json:"transactionReferenceNumber"`
-	InternalControlNumber           *string   `ncpdp:"21A7" json:"internalControlNumber"`
-	Url                             *string   `ncpdp:"21MA" json:"url"`
+	SegmentID                       *string `ncpdp:"21AM" json:"segmentID"`
+	TransactionResponseStatus       *string `ncpdp:"21AN" json:"transactionResponseStatus"`
+	AuthorizationNumber             *string `ncpdp:"21F3" json:"authorizationNumber"`
+	RejectCount                     *int    `ncpdp:"21FA" json:"rejectCount"`
+	RejectCode                      *string `ncpdp:"21FB" json:"rejectCode"`
+	RejectFieldOccuranceIndicator   *string `ncpdp:"214F" json:"rejectFieldOccuranceIndicator"`
+	ApprovedMessageCodeCount        *int    `ncpdp:"215F" json:"approvedMessageCodeCount"`
+	ApprovedMessageCode             *string `ncpdp:"216F" json:"approvedMessageCode"`
+	AdditionalMessageInfoCount      *int    `ncpdp:"21UF" json:"additionalMessageInfoCount"`
+	AdditionalMessageInfoQualifier  *string `ncpdp:"21UH" json:"additionalMessageInfoQualifier"`
+	AdditionalMessageInfo           *string `ncpdp:"21FQ" json:"additionalMessageInfo"`
+	AdditionalMessageInfoContinuity *string `ncpdp:"21UG" json:"additionalMessageInfoContinuity"`
+	HelpDeskPhoneNumberQualifier    *string `ncpdp:"217F" json:"helpDeskPhoneNumberQualifier"`
+	HelpDeskPhoneNumber             *string `ncpdp:"218F" json:"helpDeskPhoneNumber"`
+	TransactionReferenceNumber      *string `ncpdp:"21K5" json:"transactionReferenceNumber"`
+	InternalControlNumber           *string `ncpdp:"21A7" json:"internalControlNumber"`
+	Url                             *string `ncpdp:"21MA" json:"url"`
 }
 
 type ResponseClaim struct {
