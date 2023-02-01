@@ -141,7 +141,7 @@ func attachFieldValueToStruct(msg *ncpdpMessage, tag string, indirectFieldVal re
 				fieldIsPointer = false
 			}
 			fieldArray, err := msg.groups[groupId].GetFieldArrayById(tag)
-			if errors.Unwrap(err) != NCPDPSegmentNotFound {
+			if err != nil && errors.Unwrap(err) != NCPDPSegmentNotFound {
 				return err
 			}
 			err = attachValueToFieldArray(fieldKind, fieldTypeName, fieldIsPointer, indirectFieldVal, fieldIndex, fieldArray)
@@ -236,13 +236,17 @@ func attachValueToField(fieldKind reflect.Kind, fieldTypeName string, fieldIsPoi
 			}
 			return flErr
 		}
+	case reflect.Slice:
+		if fieldTypeName == "string" {
+
+		}
 	}
 
 	return nil
 }
 func attachValueToFieldArray(fieldKind reflect.Kind, fieldTypeName string, fieldIsPointer bool, indirectFieldVal reflect.Value, fieldIndex int, ncpdpField []*field) error {
-	switch fieldKind {
-	case reflect.String:
+	switch fieldTypeName {
+	case reflect.String.String():
 		if fieldIsPointer {
 			for _, f := range ncpdpField {
 				b := reflect.Append(indirectFieldVal.Field(fieldIndex), reflect.ValueOf(&f.fieldData))
@@ -256,7 +260,7 @@ func attachValueToFieldArray(fieldKind reflect.Kind, fieldTypeName string, field
 			}
 
 		}
-	case reflect.Int:
+	case reflect.Int.String():
 
 		for _, f := range ncpdpField {
 			val, err := f.int()
@@ -266,7 +270,7 @@ func attachValueToFieldArray(fieldKind reflect.Kind, fieldTypeName string, field
 			b := reflect.Append(indirectFieldVal.Field(fieldIndex), reflect.ValueOf(val))
 			indirectFieldVal.Field(fieldIndex).Set(b)
 		}
-	case reflect.Float64:
+	case reflect.Float64.String():
 		if fieldTypeName == "Currency64" {
 			for _, f := range ncpdpField {
 				val, err := f.Currency64()
@@ -287,7 +291,7 @@ func attachValueToFieldArray(fieldKind reflect.Kind, fieldTypeName string, field
 			}
 		}
 
-	case reflect.Float32:
+	case reflect.Float32.String():
 		if fieldTypeName == "Currency64" {
 			for _, f := range ncpdpField {
 				val, err := f.Currency32()
