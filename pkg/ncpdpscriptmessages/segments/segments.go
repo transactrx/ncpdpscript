@@ -187,3 +187,16 @@ type ResponseClaim struct {
 	PreferredProductDescription        []*string                `ncpdp:"22AU" json:"preferredProductDescription"`
 	MedicaidInternalCtrlNumber         *string                  `ncpdp:"22E7" json:"medicaidInternalCtrlNumber"`
 }
+
+type Clinical struct {
+	SegmentID                  *string   `ncpdp:"13AM" json:"segmentID"`
+	DiagnosisCodeCount         *int      `ncpdp:"13VE" json:"diagnosisCodeCount"`
+	DiagnosisCodeQualifier     []*string `ncpdp:"13WE" json:"diagnosisCodeQualifier"`
+	DiagnosisCode              []*string `ncpdp:"13DO" json:"diagnosisCode"`
+	ClinicalInformationCounter *int      `ncpdp:"13XE" json:"clinicalInformationCounter"`
+	MeasurementDate            *string   `ncpdp:"13ZE" json:"measurementDate"`
+	MeasurementTime            *string   `ncpdp:"13H1" json:"measurementTime"`
+	MeasurementDimension       []*string `ncpdp:"13H2" json:"measurementDimension"`
+	MeasurementUnit            []*string `ncpdp:"13H3" json:"measurementUnit"`
+	MeasurementValue           []*string `ncpdp:"13H4" json:"measurementValue"`
+}
