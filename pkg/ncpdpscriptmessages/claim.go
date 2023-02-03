@@ -50,7 +50,7 @@ func IsTransactionB1ResponseAccepted(msg B1Response) bool {
 	var result = false
 	header := msg.Header
 	if msg.Claims != nil && len(msg.Claims) > 0 && header != nil {
-		if msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
+		if msg.Claims[0].ResponseStatus != nil && msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
 			claimStatus := *msg.Claims[0].ResponseStatus.TransactionResponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
 			//log.Printf("-> claim.Status: %s", claimStatus)
@@ -66,7 +66,7 @@ func IsTransactionB2ResponseAccepted(msg B2Response) bool {
 	var result = false
 	header := msg.Header
 	if msg.Claims != nil && len(msg.Claims) > 0 && header != nil {
-		if msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
+		if msg.Claims[0].ResponseStatus != nil && msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
 			claimStatus := *msg.Claims[0].ResponseStatus.TransactionResponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
 			//log.Printf("-> claim.Status: %s", claimStatus)
