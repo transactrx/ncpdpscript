@@ -33,6 +33,7 @@ type B1RequestClaim struct {
 	Claim      *segments.RequestClaim `ncpdp:":07" json:"claim"`
 	Pricing    *segments.Pricing      `ncpdp:":11" json:"pricing"`
 	Prescriber *segments.Prescriber   `ncpdp:":03" json:"prescriber"`
+	Clinical   *segments.Clinical     `ncpdp:":13" json:"prescriber"`
 }
 
 type B2RequestClaim struct {
