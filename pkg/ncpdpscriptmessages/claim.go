@@ -18,15 +18,17 @@ type B2Request struct {
 }
 
 type B1Response struct {
-	Header  *segments.ResponseHeader `ncpdp:"0:header" json:"header"`
-	Message *segments.Message        `ncpdp:"0:20" json:"message"`
-	Claims  []*ResponseClaim         `ncpdp:"" json:"claims"`
+	Header    *segments.ResponseHeader    `ncpdp:"0:header" json:"header"`
+	Message   *segments.Message           `ncpdp:"0:20" json:"message"`
+	Insurance *segments.ResponseInsurance `ncpdp:"0:25" json:"insurance"`
+	Claims    []*ResponseClaim            `ncpdp:"" json:"claims"`
 }
 
 type B2Response struct {
-	Header  *segments.ResponseHeader `ncpdp:"0:header" json:"header"`
-	Message *segments.Message        `ncpdp:"0:20" json:"message"`
-	Claims  []*ResponseClaim         `ncpdp:"" json:"claims"`
+	Header    *segments.ResponseHeader    `ncpdp:"0:header" json:"header"`
+	Message   *segments.Message           `ncpdp:"0:20" json:"message"`
+	Insurance *segments.ResponseInsurance `ncpdp:"0:25" json:"insurance"`
+	Claims    []*ResponseClaim            `ncpdp:"" json:"claims"`
 }
 
 type B1RequestClaim struct {
@@ -44,14 +46,23 @@ type B2RequestClaim struct {
 type ResponseClaim struct {
 	ResponseStatus *segments.ResponseStatus `ncpdp:":21"json:"responseStatus"`
 	ResponseClaim  *segments.ResponseClaim  `ncpdp:":22"json:"responseClaim"`
+	ResponseDUR    *segments.ResponseDUR    `ncpdp:":24"json:"responseDUR"`
 }
 
-func IsTransactionB1ResponseAccepted(msg B1Response) bool {
+func (ncpdp B1Response) GetFullFormattedPayerResponse() (string, error) {
+	return GetFormattedPayerResponse(ncpdp)
+}
+
+func (ncpdp B2Response) GetFullFormattedPayerResponse() (string, error) {
+	return GetFormattedPayerResponse(ncpdp)
+}
+
+func (ncpdp B1Response) IsTransactionResponseAccepted() bool {
 	var result = false
-	header := msg.Header
-	if msg.Claims != nil && len(msg.Claims) > 0 && header != nil {
-		if msg.Claims[0].ResponseStatus != nil && msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
-			claimStatus := *msg.Claims[0].ResponseStatus.TransactionResponseStatus
+	header := ncpdp.Header
+	if ncpdp.Claims != nil && len(ncpdp.Claims) > 0 && header != nil {
+		if ncpdp.Claims[0].ResponseStatus != nil && ncpdp.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
+			claimStatus := *ncpdp.Claims[0].ResponseStatus.TransactionResponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
 			//log.Printf("-> claim.Status: %s", claimStatus)
 			//log.Printf("-> header.Status: %s", headerReponseStatus)
@@ -62,12 +73,13 @@ func IsTransactionB1ResponseAccepted(msg B1Response) bool {
 	}
 	return result
 }
-func IsTransactionB2ResponseAccepted(msg B2Response) bool {
+
+func (ncpdp B2Response) IsTransactionResponseAccepted() bool {
 	var result = false
-	header := msg.Header
-	if msg.Claims != nil && len(msg.Claims) > 0 && header != nil {
-		if msg.Claims[0].ResponseStatus != nil && msg.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
-			claimStatus := *msg.Claims[0].ResponseStatus.TransactionResponseStatus
+	header := ncpdp.Header
+	if ncpdp.Claims != nil && len(ncpdp.Claims) > 0 && header != nil {
+		if ncpdp.Claims[0].ResponseStatus != nil && ncpdp.Claims[0].ResponseStatus.TransactionResponseStatus != nil && header.TransactionResponseStatus != nil {
+			claimStatus := *ncpdp.Claims[0].ResponseStatus.TransactionResponseStatus
 			headerReponseStatus := *header.TransactionResponseStatus
 			//log.Printf("-> claim.Status: %s", claimStatus)
 			//log.Printf("-> header.Status: %s", headerReponseStatus)
