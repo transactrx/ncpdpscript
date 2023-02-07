@@ -200,3 +200,29 @@ type Clinical struct {
 	MeasurementUnit            []*string `ncpdp:"13H3" json:"measurementUnit"`
 	MeasurementValue           []*string `ncpdp:"13H4" json:"measurementValue"`
 }
+
+type ResponseDUR struct {
+	SegmentID                *string   `ncpdp:"24AM" json:"segmentID"`
+	ResponseCodeCounter      []*int    `ncpdp:"24J6" json:"responseCodeCounter"`
+	ReasonForServiceCode     []*string `ncpdp:"24E4" json:"reasonForServiceCode"`
+	ClinicalSignificanceCode []*string `ncpdp:"24FS" json:"clinicalSignificanceCode"`
+	OtherPharmacyIndicator   []*int    `ncpdp:"24FT" json:"otherPharmacyIndicator"`
+	PreviousDateOfFill       []*string `ncpdp:"24FU" json:"previousDateOfFill"`
+	PreviousFillQuantity     []*int    `ncpdp:"24FV" json:"previousFillQuantity"`
+	DatabaseIndicator        []*string `ncpdp:"24FW" json:"databaseIndicator"`
+	OtherPrescriberIndicator []*string `ncpdp:"24FX" json:"otherPrescriberIndicator"`
+	Message                  []*string `ncpdp:"24FY" json:"message"`
+	AdditionalText           []*string `ncpdp:"24NS" json:"additionalText"`
+}
+
+type ResponseInsurance struct {
+	SegmentId              *string `ncpdp:"25AM" json:"segmentId"`
+	GroupID                *string `ncpdp:"25C1" json:"groupID"`
+	PlanId                 *string `ncpdp:"25FO" json:"planId"`
+	NetworkReimbursementId *string `ncpdp:"252F" json:"networkReimbursementId"`
+	PayerQualifier         *string `ncpdp:"25J7" json:"payerQualifier"`
+	PayerId                *string `ncpdp:"25J8" json:"payerId"`
+	MedicaidIdNumber       *string `ncpdp:"25N5" json:"medicaidIdNumber"`
+	MedicaidAgencyNumber   *string `ncpdp:"25N6" json:"medicaidAgencyNumber"`
+	CardHolderId           *string `ncpdp:"25C2" json:"cardHolderId"`
+}
