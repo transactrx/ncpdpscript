@@ -230,6 +230,6 @@ func DetermineTransactionType(data []byte) (int, error) {
 	if headerInfo == "D0B2" || headerInfo == "D0S2" {
 		return B2RequestType, nil
 	}
-
+	fmt.Printf("Unable to parse transactions. NCPDP message is invalid or unsupported -> %s", string(data))
 	return 0, NCPDPMessageInvalidOrUnsupported
 }
