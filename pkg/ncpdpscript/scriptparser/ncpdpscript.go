@@ -217,18 +217,19 @@ func DetermineTransactionType(data []byte) (int, error) {
 
 	//check if response object
 	headerInfo := string(data[0:4])
-	if headerInfo == "D0B1" {
+	if headerInfo == "D0B1" || headerInfo == "D0S1" {
 		return B1ResponseType, nil
 	}
-	if headerInfo == "D0B2" {
+	if headerInfo == "D0B2" || headerInfo == "D0S2" {
 		return B2ResponseType, nil
 	}
 	headerInfo = string(data[6:10])
-	if headerInfo == "D0B1" {
+	if headerInfo == "D0B1" || headerInfo == "D0S1" {
 		return B1RequestType, nil
 	}
-	if headerInfo == "D0B2" {
+	if headerInfo == "D0B2" || headerInfo == "D0S2" {
 		return B2RequestType, nil
 	}
+
 	return 0, NCPDPMessageInvalidOrUnsupported
 }

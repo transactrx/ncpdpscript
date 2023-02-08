@@ -41,9 +41,9 @@ func getPayerResponse(isAccepted bool, claims []*ResponseClaim, message *segment
 }
 
 func GetFormattedPayerResponse(obj interface{}) (string, error) {
-	if response, ok := any(obj).(B1Response); ok == true {
+	if response, ok := obj.(B1Response); ok == true {
 		return getPayerResponse(!response.IsTransactionResponseAccepted(), response.Claims, response.Message), nil
-	} else if response, ok := any(obj).(B2Response); ok == true {
+	} else if response, ok := obj.(B2Response); ok == true {
 		return getPayerResponse(!response.IsTransactionResponseAccepted(), response.Claims, response.Message), nil
 	} else {
 		return "", scriptparser.NCPDPMessageInvalidOrUnsupported
