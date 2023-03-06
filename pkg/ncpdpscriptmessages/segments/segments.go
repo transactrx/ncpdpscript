@@ -126,7 +126,7 @@ type Pricing struct {
 	OtherAmountClaimedSubmitted          []*scriptparser.Currency64 `ncpdp:"11H9" json:"otherAmountClaimedSubmitted"`
 	PercentageSalesTaxAmountSubmitted    *scriptparser.Currency64   `ncpdp:"11GE" json:"percentageSalesTaxAmountSubmitted"`
 	PercentageSalesTaxBasisSubmitted     *string                    `ncpdp:"11JE" json:"percentageSalesTaxBasisSubmitted"`
-	PercentageSalesTaxRateSubmitted      *string                    `ncpdp:"11HE" json:"percentageSalesTaxRateSubmitted"`
+	PercentageSalesTaxRateSubmitted      *scriptparser.Currency64   `ncpdp:"11HE" json:"percentageSalesTaxRateSubmitted"`
 	UsualAndCustomaryCharge              *scriptparser.Currency64   `ncpdp:"11DQ" json:"usualAndCustomaryCharge"`
 	GrossAmountDue                       *scriptparser.Currency64   `ncpdp:"11DU" json:"grossAmountDue"`
 	BasisOfCostDetermination             *string                    `ncpdp:"11DN" json:"basisOfCostDetermination"`
