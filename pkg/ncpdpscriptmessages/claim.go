@@ -107,6 +107,31 @@ func (claim ResponseClaim) IsClaimResponseAccepted(tp string) bool {
 	return false
 }
 
+func (claim ResponseClaim) getClaimResponseStatus() string {
+	if claim.ResponseStatus != nil && claim.ResponseStatus.TransactionResponseStatus != nil {
+		claimStatus := *claim.ResponseStatus.TransactionResponseStatus
+
+		switch claimStatus {
+		case "A":
+			return "A-ACCEPTED"
+		case "R":
+			return "R-REJECTED"
+		case "D":
+			return "D-DUPLICATED"
+		case "P":
+			return "p-PAID"
+		case "Q":
+			return "Q-QUEUE"
+		case "C":
+			return "C-CAPTURED"
+		default:
+			return ""
+		}
+	}
+
+	return ""
+}
+
 //func (ncpdp B2Response) IsTransactionResponseAccepted() bool {
 //	var result = false
 //	header := ncpdp.Header
