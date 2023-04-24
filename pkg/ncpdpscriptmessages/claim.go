@@ -81,7 +81,7 @@ func (ncpdp B1Response) IsTransactionResponseAccepted() bool {
 			headerReponseStatus := *header.TransactionResponseStatus
 			if headerReponseStatus == "A" {
 				for _, claim := range ncpdp.Claims {
-					if IsClaimB1ResponseAccepted(*claim) == false {
+					if claim.IsClaimResponseAccepted("B1") == false {
 						return false
 					}
 				}
@@ -91,21 +91,17 @@ func (ncpdp B1Response) IsTransactionResponseAccepted() bool {
 	return false
 }
 
-func IsClaimB1ResponseAccepted(claim ResponseClaim) bool {
+func (claim ResponseClaim) IsClaimResponseAccepted(tp string) bool {
 	if claim.ResponseStatus != nil && claim.ResponseStatus.TransactionResponseStatus != nil {
 		claimStatus := *claim.ResponseStatus.TransactionResponseStatus
-		if claimStatus == "A" || claimStatus == "C" || claimStatus == "D" || claimStatus == "P" || claimStatus == "Q" {
-			return true
-		}
-	}
-	return false
-}
-
-func IsClaimB2ResponseAccepted(claim ResponseClaim) bool {
-	if claim.ResponseStatus != nil && claim.ResponseStatus.TransactionResponseStatus != nil {
-		claimStatus := *claim.ResponseStatus.TransactionResponseStatus
-		if claimStatus == "A" {
-			return true
+		if tp == "B1" {
+			if claimStatus == "A" || claimStatus == "C" || claimStatus == "D" || claimStatus == "P" || claimStatus == "Q" {
+				return true
+			}
+		} else if tp == "B2" {
+			if claimStatus == "A" {
+				return true
+			}
 		}
 	}
 	return false
@@ -136,7 +132,7 @@ func (ncpdp B2Response) IsTransactionResponseAccepted() bool {
 			headerReponseStatus := *header.TransactionResponseStatus
 			if headerReponseStatus == "A" {
 				for _, claim := range ncpdp.Claims {
-					if IsClaimB2ResponseAccepted(*claim) == false {
+					if claim.IsClaimResponseAccepted("B2") == false {
 						return false
 					}
 				}
