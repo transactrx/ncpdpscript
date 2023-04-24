@@ -107,7 +107,7 @@ func (claim ResponseClaim) IsClaimResponseAccepted(tp string) bool {
 	return false
 }
 
-func (claim ResponseClaim) getClaimResponseStatus() string {
+func (claim ResponseClaim) GetClaimResponseStatus() string {
 	if claim.ResponseStatus != nil && claim.ResponseStatus.TransactionResponseStatus != nil {
 		claimStatus := *claim.ResponseStatus.TransactionResponseStatus
 
