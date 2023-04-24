@@ -119,7 +119,7 @@ func (claim ResponseClaim) GetClaimResponseStatus() string {
 		case "D":
 			return "D-DUPLICATED"
 		case "P":
-			return "p-PAID"
+			return "P-PAID"
 		case "Q":
 			return "Q-QUEUE"
 		case "C":
