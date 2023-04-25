@@ -53,8 +53,8 @@ func GetFormattedPayerResponse(obj interface{}) (string, error) {
 func getFormattedPayerRejectedResponse(claims []*ResponseClaim, message *segments.Message) string {
 	result := ""
 
-	if claims != nil && len(claims) > 0 && claims[0].ResponseStatus != nil && claims[0].ResponseStatus.AdditionalMessageInfo != nil && len(strings.TrimSpace(*claims[0].ResponseStatus.AdditionalMessageInfo)) > 0 {
-		additionalMessageInfo := strings.TrimSpace(*claims[0].ResponseStatus.AdditionalMessageInfo)
+	if claims != nil && len(claims) > 0 && claims[0].ResponseStatus != nil && claims[0].ResponseStatus.AdditionalMessageInfo != nil {
+		additionalMessageInfo := strings.TrimSpace(strings.Join(*claims[0].ResponseStatus.AdditionalMessageInfo, " "))
 		result += fmt.Sprintf("Response Message: %s %s", strings.TrimSpace(additionalMessageInfo), getMessageEmptyIfNull(message))
 	} else {
 		result += getMessageEmptyIfNull(message)
@@ -202,8 +202,11 @@ func getMessageEmptyIfNull(message *segments.Message) string {
 
 func getStatusAdditionalMessageInfo(claims []*ResponseClaim) string {
 	result := ""
-	if claims != nil && len(claims) > 0 && claims[0].ResponseStatus != nil && claims[0].ResponseStatus.AdditionalMessageInfo != nil && len(strings.TrimSpace(*claims[0].ResponseStatus.AdditionalMessageInfo)) > 0 {
-		result = strings.TrimSpace(*claims[0].ResponseStatus.AdditionalMessageInfo)
+	if claims != nil && len(claims) > 0 && claims[0].ResponseStatus != nil && claims[0].ResponseStatus.AdditionalMessageInfo != nil {
+		additionalMessageInfo := *claims[0].ResponseStatus.AdditionalMessageInfo
+		//concatenate  all the additional message info
+
+		result = strings.TrimSpace(strings.Join(additionalMessageInfo, " "))
 	}
 	return result
 }
