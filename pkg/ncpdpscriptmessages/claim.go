@@ -32,10 +32,12 @@ type B2Response struct {
 }
 
 type B1RequestClaim struct {
-	Claim      *segments.RequestClaim `ncpdp:":07" json:"claim"`
-	Pricing    *segments.Pricing      `ncpdp:":11" json:"pricing"`
-	Prescriber *segments.Prescriber   `ncpdp:":03" json:"prescriber"`
-	Clinical   *segments.Clinical     `ncpdp:":13" json:"prescriber"`
+	Claim            *segments.RequestClaim     `ncpdp:":07" json:"claim"`
+	Pricing          *segments.Pricing          `ncpdp:":11" json:"pricing"`
+	PharmacyProvider *segments.PharmacyProvider `ncpdp:":02" json:"pharmacyProvider"`
+	Prescriber       *segments.Prescriber       `ncpdp:":03" json:"prescriber"`
+	COB              *segments.COB              `ncpdp:":05" json:"cob"`
+	Clinical         *segments.Clinical         `ncpdp:":13" json:"clinical"`
 }
 
 type B2RequestClaim struct {
