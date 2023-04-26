@@ -25,7 +25,7 @@ type Insurance struct {
 	MedicaidAgencyNumber               *string `ncpdp:"04N6" json:"medicaidAgencyNumber" jsonWithId:"116_N6_medicaidAgencyNumber"`
 }
 
-type PatientSegment struct {
+type Patient struct {
 	SegmentID                   *string `ncpdp:"01AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	PatientIDQualifier          *string `ncpdp:"01CX" json:"patientIDQualifier" jsonWithId:"331_CX_patientIDQualifier"`
 	PatientID                   *string `ncpdp:"01CY" json:"patientID" jsonWithId:"332_CY_patientID"`
