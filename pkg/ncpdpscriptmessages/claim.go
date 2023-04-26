@@ -1,14 +1,15 @@
 package ncpdpscriptmessages
 
 import (
+	jsoniter "github.com/json-iterator/go"
 	"github.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages/segments"
 )
 
 type B1Request struct {
-	Header    *segments.RequestHeader `ncpdp:"0:header" json:"header"`
-	Insurance *segments.Insurance     `ncpdp:"0:04" json:"insurance"`
-	Patient   *segments.Patient       `ncpdp:"0:01" json:"patient"`
-	Claims    []*B1RequestClaim       `ncpdp:"" json:"claims"`
+	Header    *segments.RequestHeader `ncpdp:"0:header" json:"header" jsonWithId:"header"`
+	Insurance *segments.Insurance     `ncpdp:"0:04" json:"insurance" jsonWithId:"AM04_insurance"`
+	Patient   *segments.Patient       `ncpdp:"0:01" json:"patient" jsonWithId:"AM01_patient"`
+	Claims    []*B1RequestClaim       `ncpdp:"" json:"claims" jsonWithId:"claims"`
 }
 
 type B2Request struct {
@@ -32,19 +33,19 @@ type B2Response struct {
 }
 
 type B1RequestClaim struct {
-	Claim                   *segments.RequestClaim            `ncpdp:":07" json:"claim"`
-	Pricing                 *segments.Pricing                 `ncpdp:":11" json:"pricing"`
-	PharmacyProvider        *segments.PharmacyProvider        `ncpdp:":02" json:"pharmacyProvider"`
-	Prescriber              *segments.Prescriber              `ncpdp:":03" json:"prescriber"`
-	COB                     *segments.COB                     `ncpdp:":05" json:"COB"`
-	WorkersComp             *segments.WorkersCompensation     `ncpdp:":06" json:"workersComp"`
-	DUR                     *segments.DUR                     `ncpdp:":08" json:"DUR"`
-	Coupon                  *segments.Coupon                  `ncpdp:":09" json:"coupon"`
-	Compound                *segments.Compound                `ncpdp:":10" json:"compound"`
-	Clinical                *segments.Clinical                `ncpdp:":13" json:"clinical"`
-	AdditionalDocumentation *segments.AdditionalDocumentation `ncpdp:":14" json:"additionalDocumentation"`
-	Facility                *segments.Facility                `ncpdp:":15" json:"facility"`
-	Narrative               *segments.Narrative               `ncpdp:":16" json:"narrative"`
+	Claim                   *segments.RequestClaim            `ncpdp:":07" json:"claim" jsonWithId:"AM07_claim"`
+	Pricing                 *segments.Pricing                 `ncpdp:":11" json:"pricing" jsonWithId:"AM11_pricing"`
+	PharmacyProvider        *segments.PharmacyProvider        `ncpdp:":02" json:"pharmacyProvider" jsonWithId:"AM02_pharmacyProvider"`
+	Prescriber              *segments.Prescriber              `ncpdp:":03" json:"prescriber" jsonWithId:"AM03_prescriber"`
+	COB                     *segments.COB                     `ncpdp:":05" json:"COB" jsonWithId:"AM05_COB"`
+	WorkersComp             *segments.WorkersCompensation     `ncpdp:":06" json:"workersComp" jsonWithId:"AM06_workersComp"`
+	DUR                     *segments.DUR                     `ncpdp:":08" json:"DUR" jsonWithId:"AM08_DUR"`
+	Coupon                  *segments.Coupon                  `ncpdp:":09" json:"coupon" jsonWithId:"AM09_coupon"`
+	Compound                *segments.Compound                `ncpdp:":10" json:"compound" jsonWithId:"AM10_compound"`
+	Clinical                *segments.Clinical                `ncpdp:":13" json:"clinical" jsonWithId:"AM13_clinical"`
+	AdditionalDocumentation *segments.AdditionalDocumentation `ncpdp:":14" json:"additionalDocumentation" jsonWithId:"AM14_additionalDocumentation"`
+	Facility                *segments.Facility                `ncpdp:":15" json:"facility" jsonWithId:"AM15_facility"`
+	Narrative               *segments.Narrative               `ncpdp:":16" json:"narrative" jsonWithId:"AM16_narrative"`
 }
 
 type B2RequestClaim struct {
@@ -58,11 +59,11 @@ type ResponseClaim struct {
 	ResponseDUR    *segments.ResponseDUR    `ncpdp:":24"json:"responseDUR"`
 }
 
-func (ncpdp B1Response) GetFullFormattedPayerResponse() (string, error) {
+func (ncpdp *B1Response) GetFullFormattedPayerResponse() (string, error) {
 	return GetFormattedPayerResponse(ncpdp)
 }
 
-func (ncpdp B2Response) GetFullFormattedPayerResponse() (string, error) {
+func (ncpdp *B2Response) GetFullFormattedPayerResponse() (string, error) {
 	return GetFormattedPayerResponse(ncpdp)
 }
 
@@ -82,7 +83,7 @@ func (ncpdp B2Response) GetFullFormattedPayerResponse() (string, error) {
 //}
 
 // todo Only rejected is completed rejected
-func (ncpdp B1Response) IsTransactionResponseAccepted() bool {
+func (ncpdp *B1Response) IsTransactionResponseAccepted() bool {
 
 	header := ncpdp.Header
 	if ncpdp.Claims != nil && len(ncpdp.Claims) > 0 && header != nil {
@@ -100,7 +101,15 @@ func (ncpdp B1Response) IsTransactionResponseAccepted() bool {
 	return false
 }
 
-func (claim ResponseClaim) IsClaimResponseAccepted(tp string) bool {
+func (ncpdp *B1Request) GetJsonWithIds(includeNull bool) ([]byte, error) {
+	var json1 = jsoniter.Config{
+		TagKey: "jsonWithId",
+	}.Froze()
+	jsonWithName, err := json1.Marshal(ncpdp)
+	return jsonWithName, err
+}
+
+func (claim *ResponseClaim) IsClaimResponseAccepted(tp string) bool {
 	if claim.ResponseStatus != nil && claim.ResponseStatus.TransactionResponseStatus != nil {
 		claimStatus := *claim.ResponseStatus.TransactionResponseStatus
 		if tp == "B1" {
@@ -116,7 +125,7 @@ func (claim ResponseClaim) IsClaimResponseAccepted(tp string) bool {
 	return false
 }
 
-func (claim ResponseClaim) GetClaimResponseStatus() string {
+func (claim *ResponseClaim) GetClaimResponseStatus() string {
 	if claim.ResponseStatus != nil && claim.ResponseStatus.TransactionResponseStatus != nil {
 		claimStatus := *claim.ResponseStatus.TransactionResponseStatus
 
@@ -158,7 +167,7 @@ func (claim ResponseClaim) GetClaimResponseStatus() string {
 //	return result
 //}
 
-func (ncpdp B2Response) IsTransactionResponseAccepted() bool {
+func (ncpdp *B2Response) IsTransactionResponseAccepted() bool {
 
 	header := ncpdp.Header
 	if ncpdp.Claims != nil && len(ncpdp.Claims) > 0 && header != nil {
