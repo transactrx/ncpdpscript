@@ -32,12 +32,19 @@ type B2Response struct {
 }
 
 type B1RequestClaim struct {
-	Claim            *segments.RequestClaim     `ncpdp:":07" json:"claim"`
-	Pricing          *segments.Pricing          `ncpdp:":11" json:"pricing"`
-	PharmacyProvider *segments.PharmacyProvider `ncpdp:":02" json:"pharmacyProvider"`
-	Prescriber       *segments.Prescriber       `ncpdp:":03" json:"prescriber"`
-	COB              *segments.COB              `ncpdp:":05" json:"cob"`
-	Clinical         *segments.Clinical         `ncpdp:":13" json:"clinical"`
+	Claim                   *segments.RequestClaim            `ncpdp:":07" json:"claim"`
+	Pricing                 *segments.Pricing                 `ncpdp:":11" json:"pricing"`
+	PharmacyProvider        *segments.PharmacyProvider        `ncpdp:":02" json:"pharmacyProvider"`
+	Prescriber              *segments.Prescriber              `ncpdp:":03" json:"prescriber"`
+	COB                     *segments.COB                     `ncpdp:":05" json:"COB"`
+	WorkersComp             *segments.WorkersCompensation     `ncpdp:":06" json:"workersComp"`
+	DUR                     *segments.DUR                     `ncpdp:":08" json:"DUR"`
+	Coupon                  *segments.Coupon                  `ncpdp:":09" json:"coupon"`
+	Compound                *segments.Compound                `ncpdp:":10" json:"compound"`
+	Clinical                *segments.Clinical                `ncpdp:":13" json:"clinical"`
+	AdditionalDocumentation *segments.AdditionalDocumentation `ncpdp:":14" json:"additionalDocumentation"`
+	Facility                *segments.Facility                `ncpdp:":15" json:"facility"`
+	Narrative               *segments.Narrative               `ncpdp:":16" json:"narrative"`
 }
 
 type B2RequestClaim struct {
