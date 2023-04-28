@@ -3,7 +3,6 @@ package segments
 import (
 	"fmt"
 	"github.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
-	"github.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages"
 	"strconv"
 	"strings"
 )
@@ -181,7 +180,7 @@ func (responseDUR *B1ResponseDUR) GetFormattedDUR() string {
 		rfsc := responseDUR.ReasonForServiceCode
 		if rfsc != nil {
 			for _, value := range rfsc {
-				result += "Reason For Service Code: " + ncpdpscriptmessages.GetReasonForServiceCodeMap()[*value] + "\n"
+				result += "Reason For Service Code: " + getReasonForServiceCodeMap()[*value] + "\n"
 			}
 		}
 

@@ -1,6 +1,6 @@
 package ncpdpscriptmessages
 
-var reasonForServiceCodeMap = GetReasonForServiceCodeMap()
+var reasonForServiceCodeMap = getReasonForServiceCodeMap()
 
 func getReasonForServiceCodeMap() map[string]string {
 	reasonForServiceCodeMap := make(map[string]string)

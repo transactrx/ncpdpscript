@@ -1,15 +1,68 @@
 package segments
 
-type ResponseDUR struct {
-	SegmentID                *string   `ncpdp:"24AM" json:"segmentID"`
-	ResponseCodeCounter      []*int    `ncpdp:"24J6" json:"responseCodeCounter"`
-	ReasonForServiceCode     []*string `ncpdp:"24E4" json:"reasonForServiceCode"`
-	ClinicalSignificanceCode []*string `ncpdp:"24FS" json:"clinicalSignificanceCode"`
-	OtherPharmacyIndicator   []*int    `ncpdp:"24FT" json:"otherPharmacyIndicator"`
-	PreviousDateOfFill       []*string `ncpdp:"24FU" json:"previousDateOfFill"`
-	PreviousFillQuantity     []*int    `ncpdp:"24FV" json:"previousFillQuantity"`
-	DatabaseIndicator        []*string `ncpdp:"24FW" json:"databaseIndicator"`
-	OtherPrescriberIndicator []*string `ncpdp:"24FX" json:"otherPrescriberIndicator"`
-	Message                  []*string `ncpdp:"24FY" json:"message"`
-	AdditionalText           []*string `ncpdp:"24NS" json:"additionalText"`
+var reasonForServiceCodeMap = initReasonForServiceCodeMap()
+
+func initReasonForServiceCodeMap() map[string]string {
+	reasonForServiceCodeMap := make(map[string]string)
+	reasonForServiceCodeMap["AD"] = "Additional Drug Needed"
+	reasonForServiceCodeMap["AN"] = "Prescription Authentication"
+	reasonForServiceCodeMap["AR"] = "Adverse Drug Reaction"
+	reasonForServiceCodeMap["AT"] = "Additive Toxicity"
+	reasonForServiceCodeMap["CD"] = "Chronic Disease Management"
+	reasonForServiceCodeMap["CH"] = "Call Help Desk"
+	reasonForServiceCodeMap["CS"] = "Patient Complaint/Symptom"
+	reasonForServiceCodeMap["DA"] = "Drug-Allergy"
+	reasonForServiceCodeMap["DC"] = "Drug-Disease (Inferred)"
+	reasonForServiceCodeMap["DD"] = "Drug-Drug Interaction"
+	reasonForServiceCodeMap["DF"] = "Drug-Food interaction"
+	reasonForServiceCodeMap["DI"] = "Drug Incompatibility"
+	reasonForServiceCodeMap["DL"] = "Drug-Lab Conflict"
+	reasonForServiceCodeMap["DM"] = "Apparent Drug Misuse"
+	reasonForServiceCodeMap["DS"] = "Tobacco Use"
+	reasonForServiceCodeMap["ED"] = "Patient Education/Instruction"
+	reasonForServiceCodeMap["ER"] = "Overuse"
+	reasonForServiceCodeMap["EX"] = "Excessive Quantity"
+	reasonForServiceCodeMap["HD"] = "High Dose"
+	reasonForServiceCodeMap["IC"] = "Iatrogenic Condition"
+	reasonForServiceCodeMap["ID"] = "Ingredient Duplication"
+	reasonForServiceCodeMap["LD"] = "Low Dose"
+	reasonForServiceCodeMap["LK"] = "Lock In Recipient"
+	reasonForServiceCodeMap["LR"] = "Underuse"
+	reasonForServiceCodeMap["MC"] = "Drug-Disease (Reported)"
+	reasonForServiceCodeMap["MN"] = "Insufficient Duration"
+	reasonForServiceCodeMap["MS"] = "Missing Information/Clarification"
+	reasonForServiceCodeMap["MX"] = "Excessive Duration"
+	reasonForServiceCodeMap["NA"] = "Drug Not Available"
+	reasonForServiceCodeMap["NC"] = "Non-covered Drug Purchase"
+	reasonForServiceCodeMap["ND"] = "New Disease/Diagnosis"
+	reasonForServiceCodeMap["NF"] = "Non-Formulary Drug"
+	reasonForServiceCodeMap["NN"] = "Unnecessary Drug"
+	reasonForServiceCodeMap["NP"] = "New Patient Processing"
+	reasonForServiceCodeMap["NR"] = "Lactation/Nursing Interaction"
+	reasonForServiceCodeMap["NS"] = "Insufficient Quantity"
+	reasonForServiceCodeMap["OH"] = "Alcohol Conflict"
+	reasonForServiceCodeMap["PA"] = "Drug-Age"
+	reasonForServiceCodeMap["PC"] = "Patient Question/Concern"
+	reasonForServiceCodeMap["PG"] = "Drug-Pregnancy"
+	reasonForServiceCodeMap["PH"] = "Preventive Health Care"
+	reasonForServiceCodeMap["PN"] = "Prescriber Consultation"
+	reasonForServiceCodeMap["PP"] = "Plan Protocol"
+	reasonForServiceCodeMap["PR"] = "Prior Adverse Reaction"
+	reasonForServiceCodeMap["PS"] = "Product Selection Opportunity"
+	reasonForServiceCodeMap["RE"] = "Suspected Environmental Risk"
+	reasonForServiceCodeMap["RF"] = "Health Provider Referral"
+	reasonForServiceCodeMap["SC"] = "Suboptimal Compliance"
+	reasonForServiceCodeMap["SD"] = "Suboptimal Drug/Indication"
+	reasonForServiceCodeMap["SE"] = "Side Effect"
+	reasonForServiceCodeMap["SF"] = "Suboptimal Dosage Form"
+	reasonForServiceCodeMap["SR"] = "Suboptimal Regimen"
+	reasonForServiceCodeMap["SX"] = "Drug-Gender"
+	reasonForServiceCodeMap["TD"] = "Therapeutic"
+	reasonForServiceCodeMap["TN"] = "Laboratory Test Needed"
+	reasonForServiceCodeMap["TP"] = "Payer/Processor Question"
+	return reasonForServiceCodeMap
+}
+
+func getReasonForServiceCodeMap() map[string]string {
+	return reasonForServiceCodeMap
 }
