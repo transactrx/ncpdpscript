@@ -237,7 +237,7 @@ func (responseDUR *B1ResponseDUR) GetFormattedDUR() string {
 		if qty != nil {
 			for _, value := range qty {
 				if value != nil {
-					result += fmt.Sprintf("Previous Fill Quantity: %d\n", *value/1000)
+					result += fmt.Sprintf("Previous Fill Quantity: %v\n", *value)
 				}
 			}
 		}
