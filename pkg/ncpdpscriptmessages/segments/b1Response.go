@@ -181,7 +181,7 @@ func (responseDUR *B1ResponseDUR) GetFormattedDUR() string {
 		rfsc := responseDUR.ReasonForServiceCode
 		if rfsc != nil {
 			for _, value := range rfsc {
-				result += "Reason For Service Code: " + ncpdpscriptmessages.GetReasonForServiceCodeDescription(*value) + "\n"
+				result += "Reason For Service Code: " + ncpdpscriptmessages.GetReasonForServiceCodeMap()[*value] + "\n"
 			}
 		}
 
