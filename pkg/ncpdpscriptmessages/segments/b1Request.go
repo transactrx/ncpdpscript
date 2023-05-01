@@ -2,7 +2,19 @@ package segments
 
 import "github.com/transactrx/ncpdpscript/pkg/ncpdpscript/scriptparser"
 
-type Insurance struct {
+type B1RequestHeader struct {
+	Bin                           *string `ncpdp:"header:bin" json:"bin" jsonWithId:"101_A1_bin"`
+	VersionRel                    *string `ncpdp:"header:versionRel" json:"versionRel" jsonWithId:"101_A2_versionRel"`
+	TransactionCode               *string `ncpdp:"header:transactionCode" json:"transactionCode" jsonWithId:"101_A3_transactionCode"`
+	Pcn                           *string `ncpdp:"header:pcn" json:"pcn" jsonWithId:"101_A4_pcn"`
+	TransactionCount              *int    `ncpdp:"header:transactionCount" json:"transactionCount" jsonWithId:"101_A9_transactionCount"`
+	ServiceProviderIdQualifier    *string `ncpdp:"header:serviceProviderIdQualifier" json:"serviceProviderIdQualifier" jsonWithId:"101_B2_serviceProviderIdQualifier"`
+	ServiceProviderId             *string `ncpdp:"header:serviceProviderId" json:"serviceProviderId" jsonWithId:"201_B1_serviceProviderId"`
+	Dos                           *string `ncpdp:"header:dos" json:"dos" jsonWithId:"401_D1_dos"`
+	SoftwareVendorCertificationId *string `ncpdp:"header:softwareVendorCertificationId" json:"softwareVendorCertificationId" jsonWithId:"101_AK_softwareVendorCertificationId"`
+}
+
+type B1RequestInsurance struct {
 	SegmentId                          *string `ncpdp:"04AM" json:"segmentId" jsonWithId:"111_AM_segmentId"`
 	CardHolderId                       *string `ncpdp:"04C2" json:"cardHolderId" jsonWithId:"302_C2_cardHolderId"`
 	CardHolderFirstName                *string `ncpdp:"04CC" json:"cardHolderFirstName" jsonWithId:"312_CC_cardHolderFirstName"`
@@ -25,7 +37,7 @@ type Insurance struct {
 	MedicaidAgencyNumber               *string `ncpdp:"04N6" json:"medicaidAgencyNumber" jsonWithId:"116_N6_medicaidAgencyNumber"`
 }
 
-type Patient struct {
+type B1RequestPatient struct {
 	SegmentID                   *string `ncpdp:"01AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	PatientIDQualifier          *string `ncpdp:"01CX" json:"patientIDQualifier" jsonWithId:"331_CX_patientIDQualifier"`
 	PatientID                   *string `ncpdp:"01CY" json:"patientID" jsonWithId:"332_CY_patientID"`
@@ -45,7 +57,7 @@ type Patient struct {
 	PatientResidence            *string `ncpdp:"014X" json:"patientResidence" jsonWithId:"384_4X_patientResidence"`
 }
 
-type RequestClaim struct {
+type B1RequestClaim struct {
 	SegmentID                                     *string                       `ncpdp:"07AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	RxServiceRefNumberQualifier                   *string                       `ncpdp:"07EM" json:"rxServiceRefNumberQualifier" jsonWithId:"455_EM_rxServiceRefNumberQualifier"`
 	RxServiceRefNumber                            *string                       `ncpdp:"07D2" json:"rxServiceReferenceNumber" jsonWithId:"402_D2_rxServiceReferenceNumber"`
@@ -91,7 +103,7 @@ type RequestClaim struct {
 	PharmacyServiceType                           *string                       `ncpdp:"07U7" json:"pharmacyServiceType" jsonWithId:"147_U7_pharmacyServiceType"`
 }
 
-type Pricing struct {
+type B1RequestPricing struct {
 	SegmentID                            *string                    `ncpdp:"11AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	IngredientCostSubmitted              *scriptparser.Currency64   `ncpdp:"11D9" json:"ingredientCostSubmitted" jsonWithId:"409_D9_ingredientCostSubmitted"`
 	DispensingFeeSubmitted               *scriptparser.Currency64   `ncpdp:"11DC" json:"dispensingFeeSubmitted" jsonWithId:"412_DC_dispensingFeeSubmitted"`
@@ -111,13 +123,13 @@ type Pricing struct {
 	MedicaidPaidAmount                   *scriptparser.Currency64   `ncpdp:"11N3" json:"medicaidPaidAmount" jsonWithId:"113_N3_medicaidPaidAmount"`
 }
 
-type PharmacyProvider struct {
+type B1RequestPharmacyProvider struct {
 	SegmentID           *string `ncpdp:"02AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	ProviderIdQualifier *string `ncpdp:"02EY" json:"providerIdQualifier" jsonWithId:"465_EY_providerIdQualifier"`
 	ProviderId          *string `ncpdp:"02E9" json:"providerId" jsonWithId:"444_E9_providerId"`
 }
 
-type Prescriber struct {
+type B1RequestPrescriber struct {
 	SegmentID                      *string `ncpdp:"03AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	PrescriberIDQualifier          *string `ncpdp:"03EZ" json:"prescriberIDQualifier" jsonWithId:"466_EZ_prescriberIDQualifier"`
 	PrescriberID                   *string `ncpdp:"03DB" json:"prescriberID" jsonWithId:"411_DB_prescriberID"`
@@ -133,7 +145,7 @@ type Prescriber struct {
 	PrescriberZipPostalZone        *string `ncpdp:"032P" json:"prescriberZipPostalZone" jsonWithId:"368_2P_prescriberZipPostalZone"`
 }
 
-type COB struct {
+type B1RequestCOB struct {
 	SegmentID                                      *string                    `ncpdp:"05AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	OtherPaymentsCount                             *int                       `ncpdp:"054C" json:"otherPaymentsCount" jsonWithId:"337_4C_otherPaymentsCount"`
 	OtherPayerCoverageType                         *[]string                  `ncpdp:"054C" json:"otherPayerCoverageType" jsonWithId:"338_4C_otherPayerCoverageType"`
@@ -154,7 +166,7 @@ type COB struct {
 	BenefitStageAmount                             *[]scriptparser.Currency64 `ncpdp:"05MW" json:"benefitStageAmount" jsonWithId:"394_MW_benefitStageAmount"`
 }
 
-type WorkersCompensation struct {
+type B1RequestWorkersCompensation struct {
 	SegmentID                           *string `ncpdp:"06AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	DateOfInjury                        *string `ncpdp:"06DY" json:"dateOfInjury" jsonWithId:"434_DY_dateOfInjury"`
 	EmployerName                        *string `ncpdp:"06CF" json:"employerName" jsonWithId:"315_CF_employerName"`
@@ -178,7 +190,7 @@ type WorkersCompensation struct {
 	GenericEquivalentProductID          *string `ncpdp:"06UA" json:"genericEquivalentProductID" jsonWithId:"126_UA_genericEquivalentProductID"`
 }
 
-type DUR struct {
+type B1RequestDUR struct {
 	SegmentID               *string   `ncpdp:"08AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	DURPPSCodeCounter       *int      `ncpdp:"087C" json:"DURPPSCodeCounter" jsonWithId:"473_7E_DURPPSCodeCounter"`
 	ReasonForServiceCode    *[]string `ncpdp:"08E4" json:"reasonForServiceCode" jsonWithId:"439_E4_reasonForServiceCode"`
@@ -189,13 +201,13 @@ type DUR struct {
 	DURCoAgentID            *[]string `ncpdp:"08H6" json:"DURCoAgentID" jsonWithId:"476_H6_DURCoAgentID"`
 }
 
-type Coupon struct {
+type B1RequestCoupon struct {
 	SegmentID         *string `ncpdp:"09AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	CouponType        *string `ncpdp:"09KE" json:"couponType" jsonWithId:"485_KE_couponType"`
 	CouponNumber      *string `ncpdp:"09ME" json:"couponNumber" jsonWithId:"486_ME_couponNumber"`
 	CouponValueAmount *string `ncpdp:"09NE" json:"couponValueAmount" jsonWithId:"487_NE_couponValueAmount"`
 }
-type Compound struct {
+type B1RequestCompound struct {
 	SegmentID                                  *string   `ncpdp:"10AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	CompoundDosageFormDescriptionCode          *string   `ncpdp:"104C" json:"compoundDosageFormDescriptionCode" jsonWithId:"407_4C_compoundDosageFormDescriptionCode"`
 	CompoundDispensingUnitFormIndicator        *string   `ncpdp:"10U7" json:"compoundDispensingUnitFormIndicator" jsonWithId:"456_U7_compoundDispensingUnitFormIndicator"`
@@ -208,7 +220,7 @@ type Compound struct {
 	CompoundIngredientModifierCodeCount        *int      `ncpdp:"102G" json:"compoundIngredientModifierCodeCount" jsonWithId:"362_2G_compoundIngredientModifierCodeCount"`
 	CompoundIngredientModifierCode             *[]string `ncpdp:"102H" json:"compoundIngredientModifierCode" jsonWithId:"363_2H_compoundIngredientModifierCode"`
 }
-type Clinical struct {
+type B1RequestClinical struct {
 	SegmentID                  *string   `ncpdp:"13AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	DiagnosisCodeCount         *int      `ncpdp:"13VE" json:"diagnosisCodeCount" jsonWithId:"491_VE_diagnosisCodeCount"`
 	DiagnosisCodeQualifier     *[]string `ncpdp:"13WE" json:"diagnosisCodeQualifier" jsonWithId:"492_WE_diagnosisCodeQualifier"`
@@ -220,7 +232,7 @@ type Clinical struct {
 	MeasurementUnit            *[]string `ncpdp:"13H3" json:"measurementUnit" jsonWithId:"497_H3_measurementUnit"`
 	MeasurementValue           *[]string `ncpdp:"13H4" json:"measurementValue" jsonWithId:"499_H4_measurementValue"`
 }
-type AdditionalDocumentation struct {
+type B1RequestAdditionalDocumentation struct {
 	SegmentID                      *string   `ncpdp:"14AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	AdditionalDocumentationTypeID  *string   `ncpdp:"142Q" json:"additionalDocumentationTypeID" jsonWithId:"369_2Q_additionalDocumentationTypeID"`
 	RequestPeriodBeginDate         *string   `ncpdp:"142V" json:"requestPeriodBeginDate" jsonWithId:"374_2V_requestPeriodBeginDate"`
@@ -238,7 +250,7 @@ type AdditionalDocumentation struct {
 	QuestionNumericResponse        *[]string `ncpdp:"144J" json:"questionNumericResponse" jsonWithId:"382_4J_questionNumericResponse"`
 	QuestionAlphanumericResponse   *[]string `ncpdp:"144K" json:"questionAlphanumericResponse" jsonWithId:"383_4K_questionAlphanumericResponse"`
 }
-type Facility struct {
+type B1RequestFacility struct {
 	SegmentID                    *string `ncpdp:"15AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	FacilityID                   *string `ncpdp:"158C" json:"facilityID" jsonWithId:"336_8C_facilityID"`
 	FacilityName                 *string `ncpdp:"153Q" json:"facilityName" jsonWithId:"385_3Q_facilityName"`
@@ -248,7 +260,7 @@ type Facility struct {
 	FacilityZipPostalZone        *string `ncpdp:"156D" json:"facilityZipPostalZone" jsonWithId:"389_6D_facilityZipPostalZone"`
 }
 
-type Narrative struct {
+type B1RequestNarrative struct {
 	SegmentID        *string `ncpdp:"16AM" json:"segmentID" jsonWithId:"111_AM_segmentID"`
 	NarrativeMessage *string `ncpdp:"16BM" json:"narrativeMessage" jsonWithId:"390_BM_narrativeMessage"`
 }
