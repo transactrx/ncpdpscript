@@ -2,6 +2,7 @@ package ncpdpscriptmessages
 
 import (
 	"fmt"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/transactrx/ncpdpscript/pkg/ncpdpscriptmessages/segments"
 )
 
@@ -92,4 +93,11 @@ func (b2Response *B2Response) IsTransactionStatusText(rxNumber string) (string, 
 	default:
 		return "", nil
 	}
+}
+func (b2Response *B2Request) GetJsonWithIds() ([]byte, error) {
+	var json1 = jsoniter.Config{
+		TagKey: "jsonWithId",
+	}.Froze()
+	jsonWithName, err := json1.Marshal(b2Response)
+	return jsonWithName, err
 }
